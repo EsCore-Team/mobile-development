@@ -1,3 +1,41 @@
 <resources>
     <string name="app_name">EsCore</string>
+    <string name="sign_up">Sign up</string>
+    <string name="login">Sign in</string>
+    <string name="message_welcome_page">Mau belajar Android, iOS, Machine Learning, Cloud, Front-End, Back-End, dan bidang IT lainnya? Di Dicoding aja!</string>
+    <string name="title_welcome_page">Selamat datang di Dicoding!</string>
+    <string name="title_signup_page">Lengkapi data dirimu di bawah ini ya</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="message_login_page">Masukkan dulu datamu ya</string>
+    <string name="title_login_page">Sudah siap untuk upgrade skill?</string>
+    <string name="name">Nama</string>
+    <string name="message_main_page">Selamat Belajar di Dicoding.</string>
+    <string name="greeting">Halo %1$s,</string>
+    <string name="logout">Keluar</string>
+    <string name="password_validation">Password must be more than 8 characters</string>
+    <string name="email_validation">Invalid email format</string>
+
+    <string name="empty_name">Name cannot be empty</string>
+    <string name="empty_email">Email cannot be empty</string>
+    <string name="empty_password">Password cannot be empty</string>
+    <string name="confirm_logout">Confirm Logout</string>
+    <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="sign_in_to_your_account">Sign in to your account</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login_here">Login here</string>
+    <string name="new_here">New here?</string>
+    <string name="let_s_get_you_set_up">Let’s get you set up!</string>
+    <string name="email_address">Email Address</string>
+    <string name="sign_up_your_account">Sign up your account</string>
+    <string name="home">Home</string>
+    <string name="guide">Guide</string>
+    <string name="history">History</string>
+    <string name="notification">Notification</string>
+    <string name="profile">Profile</string>
 </resources>
