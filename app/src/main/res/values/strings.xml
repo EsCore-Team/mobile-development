@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">EsCore</string>
-    <string name="signup">Daftar</string>
-    <string name="login">Masuk</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_in">Sign in</string>
     <string name="message_welcome_page">Mau belajar Android, iOS, Machine Learning, Cloud, Front-End, Back-End, dan bidang IT lainnya? Di Dicoding aja!</string>
     <string name="title_welcome_page">Selamat datang di Dicoding!</string>
     <string name="title_signup_page">Lengkapi data dirimu di bawah ini ya</string>
@@ -23,4 +23,14 @@
     <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="sign_in_to_your_account">Sign in to your account</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login_here">Login here</string>
+    <string name="new_here">New here?</string>
+    <string name="let_s_get_you_set_up">Let’s get you set up!</string>
+    <string name="email_address">Email Address</string>
+    <string name="sign_up_your_account">Sign up your account</string>
 </resources>

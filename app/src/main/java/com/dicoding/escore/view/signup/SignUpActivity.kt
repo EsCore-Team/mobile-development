@@ -30,6 +30,12 @@ class SignUpActivity : AppCompatActivity() {
 
         playAnimation()
 
+        binding.toLogin.setOnClickListener {
+            val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         binding.signupButton.setOnClickListener {
             val name = binding.nameEditText.text.toString().trim()
             val email = binding.emailEditText.text.toString().trim()
@@ -100,11 +106,11 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun playAnimation() {
-        ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
-            duration = 6000
-            repeatCount = ObjectAnimator.INFINITE
-            repeatMode = ObjectAnimator.REVERSE
-        }.start()
+//        ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
+//            duration = 6000
+//            repeatCount = ObjectAnimator.INFINITE
+//            repeatMode = ObjectAnimator.REVERSE
+//        }.start()
 
         val title = ObjectAnimator.ofFloat(binding.titleTextView, View.ALPHA, 1f).setDuration(200)
         val nameText = ObjectAnimator.ofFloat(binding.nameTextView, View.ALPHA, 1f).setDuration(200)
@@ -114,9 +120,10 @@ class SignUpActivity : AppCompatActivity() {
         val passwordTextView = ObjectAnimator.ofFloat(binding.passwordTextView, View.ALPHA, 1f).setDuration(200)
         val passwordEditTextLayout = ObjectAnimator.ofFloat(binding.passwordEditTextLayout, View.ALPHA, 1f).setDuration(200)
         val signupButton = ObjectAnimator.ofFloat(binding.signupButton, View.ALPHA, 1f).setDuration(200)
+        val signIn = ObjectAnimator.ofFloat(binding.toSignInLayout, View.ALPHA, 1f).setDuration(200)
 
         AnimatorSet().apply {
-            playSequentially(title, nameText, nameEditLayout, emailTextView, emailEditTextLayout, passwordTextView, passwordEditTextLayout, signupButton)
+            playSequentially(title, nameText, nameEditLayout, emailTextView, emailEditTextLayout, passwordTextView, passwordEditTextLayout, signupButton, signIn)
             start()
         }
 
