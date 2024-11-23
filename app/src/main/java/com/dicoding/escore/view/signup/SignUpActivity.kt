@@ -73,10 +73,10 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun isInputValid(name: String, email: String, password: String): Boolean {
+    private fun isInputValid(fullName: String, email: String, password: String): Boolean {
         var isValid = true
 
-        if (name.isEmpty()) {
+        if (fullName.isEmpty()) {
             binding.nameEditTextLayout.error = getString(R.string.empty_name)
             isValid = false
         } else {

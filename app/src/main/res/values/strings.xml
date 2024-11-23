@@ -33,4 +33,9 @@
     <string name="let_s_get_you_set_up">Let’s get you set up!</string>
     <string name="email_address">Email Address</string>
     <string name="sign_up_your_account">Sign up your account</string>
+    <string name="home">Home</string>
+    <string name="guide">Guide</string>
+    <string name="history">History</string>
+    <string name="notification">Notification</string>
+    <string name="profile">Profile</string>
 </resources>

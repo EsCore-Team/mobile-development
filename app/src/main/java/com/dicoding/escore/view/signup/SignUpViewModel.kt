@@ -16,10 +16,10 @@ class SignUpViewModel(private val repository: UserRepository): ViewModel() {
     private val _registerResult = MutableLiveData<Result<SignUpResponse>>()
     val registerResult: LiveData<Result<SignUpResponse>> = _registerResult
 
-    fun register(name: String, email: String, password: String) {
+    fun register(fullName: String, email: String, password: String) {
         _isLoading.value = true
         viewModelScope.launch {
-            val result = repository.register(name, email, password)
+            val result = repository.register(fullName, email, password)
             _registerResult.value = result
             _isLoading.value = false
         }
