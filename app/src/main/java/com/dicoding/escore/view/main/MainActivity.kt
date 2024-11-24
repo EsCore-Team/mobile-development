@@ -21,9 +21,9 @@ import com.dicoding.escore.view.onboarding.OnboardingActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-//    private val viewModel by viewModels<MainViewModel> {
-//        ViewModelFactory.getInstance(this)
-//    }
+    private val viewModel by viewModels<MainViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var sessionManager: SessionManager
@@ -33,9 +33,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        sessionManager = SessionManager(this)
-//
-//        checkSession()
+        sessionManager = SessionManager(this)
+
+        checkSession()
 //
 //        setupAction()
 
@@ -55,13 +55,13 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
-//    private fun checkSession() {
-//        val token = sessionManager.getAuthToken()
-//        if (token == null) {
-//            // Jika token tidak ada, navigasi ke layar login
-//            navigateToLogin()
-//        }
-//    }
+    private fun checkSession() {
+        val token = sessionManager.getAuthToken()
+        if (token == null) {
+            // Jika token tidak ada, navigasi ke layar login
+            navigateToLogin()
+        }
+    }
 //
 //    private fun setupAction() {
 //        binding.logoutButton.setOnClickListener {
@@ -89,9 +89,9 @@ class MainActivity : AppCompatActivity() {
 //        navigateToLogin()
 //    }
 //
-//    private fun navigateToLogin() {
-//        val intent = Intent(this, OnboardingActivity::class.java)
-//        startActivity(intent)
-//        finish()
-//    }
+    private fun navigateToLogin() {
+        val intent = Intent(this, OnboardingActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 }

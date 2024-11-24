@@ -40,8 +40,8 @@ class LoginActivity : AppCompatActivity() {
             val password = binding.passwordEditText.text.toString().trim()
 
             if (isInputValid(email, password)) {
-//                viewModel.login(email, password)
-                navigateToMainActivity()
+                viewModel.login(email, password)
+//                navigateToMainActivity()
             }
         }
         playAnimation()
@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-//        observeViewModel()
+        observeViewModel()
     }
 
     private fun observeViewModel() {
@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
                 }
                 is Result.Success -> {
                     showLoading(false)
-                    val token = result.data.token
+                    val token = result.data.loginResult.token
                     lifecycleScope.launch {
                         sessionManager.saveAuthToken(token)
                     }
