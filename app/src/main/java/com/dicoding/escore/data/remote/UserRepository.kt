@@ -14,10 +14,10 @@ class UserRepository private constructor(
         return withContext(Dispatchers.IO) {
             try {
                 val response = apiService.login(email, password)
-                if (response.status == "failed") {
-                    Result.Error(response.message)
-                } else {
+                if (response.error == false) {
                     Result.Success(response)
+                } else {
+                    Result.Error(response.message)
                 }
             } catch (e: Exception) {
                 Result.Error("${e.message}")
@@ -25,13 +25,12 @@ class UserRepository private constructor(
         }
     }
 
-
     suspend fun register(fullName: String, email: String, password: String): Result<SignUpResponse> {
         return withContext(Dispatchers.IO) {
             try {
                 val response = apiService.register(fullName, email, password)
 
-                if (response.status == "success") {
+                if (response.error == false) {
                     Result.Success(response)
                 } else {
                     Result.Error(response.message)

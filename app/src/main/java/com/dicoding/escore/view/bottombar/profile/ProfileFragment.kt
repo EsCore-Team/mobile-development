@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.dicoding.escore.R
 import com.dicoding.escore.databinding.FragmentNotificationBinding
 import com.dicoding.escore.databinding.FragmentProfileBinding
+import com.dicoding.escore.pref.SessionManager
 import com.dicoding.escore.view.bottombar.notification.NotificationViewModel
 
 class ProfileFragment : Fragment() {
@@ -20,6 +21,7 @@ class ProfileFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+//    private lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +33,8 @@ class ProfileFragment : Fragment() {
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+//        sessionManager = SessionManager(this)
 
         val textView: TextView = binding.textProfile
         homeViewModel.text.observe(viewLifecycleOwner) {
