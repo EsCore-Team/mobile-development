@@ -12,7 +12,7 @@
     <string name="name">Name</string>
     <string name="message_main_page">Selamat Belajar di Dicoding.</string>
     <string name="greeting">Halo %1$s,</string>
-    <string name="logout">Keluar</string>
+    <string name="logout">Logout</string>
     <string name="password_validation">Password must be more than 8 characters</string>
     <string name="email_validation">Invalid email format</string>
 
