@@ -80,4 +80,6 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="result_label">Result: %1$s</string>
+    <string name="sugestion_result">Sugestion: %1$s</string>
 </resources>
