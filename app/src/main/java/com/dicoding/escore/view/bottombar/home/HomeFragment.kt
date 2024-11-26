@@ -37,7 +37,7 @@ class HomeFragment : Fragment() {
         binding.submitButton.setOnClickListener {
             val intent = Intent(requireContext(), UploadActivity::class.java)
             startActivity(intent)
-            requireActivity().finish()
+            requireActivity()
         }
 
         val textView: TextView = binding.textHome

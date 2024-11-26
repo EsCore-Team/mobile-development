@@ -25,7 +25,6 @@ class UploadActivity : AppCompatActivity() {
         binding.submitButton.setOnClickListener {
             val intent = Intent(this@UploadActivity, ResultUploadActivity::class.java)
             startActivity(intent)
-            finish()
         }
     }
 }
