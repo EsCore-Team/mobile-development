@@ -10,6 +10,7 @@ class SessionManager(context: Context) {
     companion object {
         private const val PREF_NAME = "user_session"
         private const val TOKEN_KEY = "auth_token"
+        private const val EMAIL_KEY = "user_email" // Tambahkan key untuk email
     }
     fun saveAuthToken(token: String) {
         preferences.edit().putString(TOKEN_KEY, token).apply()
@@ -21,5 +22,20 @@ class SessionManager(context: Context) {
 
     fun clearAuthToken() {
         preferences.edit().remove(TOKEN_KEY).apply()
+    }
+
+    // Simpan email
+    fun saveUserEmail(email: String) {
+        preferences.edit().putString(EMAIL_KEY, email).apply()
+    }
+
+    // Ambil email
+    fun getUserEmail(): String? {
+        return preferences.getString(EMAIL_KEY, null)
+    }
+
+    // Hapus email
+    fun clearUserEmail() {
+        preferences.edit().remove(EMAIL_KEY).apply()
     }
 }

@@ -27,6 +27,8 @@ interface ApiService {
     @FormUrlEncoded
     @POST("predict")
     suspend fun predict(
+        @Field("user_email") userEmail: String,
+        @Field("title") title: String,
         @Field("essay") essay: String
     ): ModelMachineLearningResponse
 }

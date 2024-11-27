@@ -20,6 +20,31 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView
+        android:id="@+id/userEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/userTextBox"
+        app:layout_constraintStart_toStartOf="@+id/userTextBox" />
+
+    <EditText
+        android:id="@+id/userTextBox"
+        android:layout_width="333dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="128dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="Judul"
+        android:inputType="text"
+        android:padding="12dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/titleLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,8 +52,8 @@
         android:text="Judul"
         android:textStyle="bold"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/smallTextBox"
-        app:layout_constraintStart_toStartOf="@id/smallTextBox" />
+        app:layout_constraintBottom_toTopOf="@id/titleTextBox"
+        app:layout_constraintStart_toStartOf="@id/titleTextBox" />
 
     <TextView
         android:id="@+id/descriptionLabel"
@@ -38,25 +63,26 @@
         android:text="Deskripsi"
         android:textStyle="bold"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/largeTextBox"
-        app:layout_constraintStart_toStartOf="@id/largeTextBox" />
+        app:layout_constraintBottom_toTopOf="@id/descTextBox"
+        app:layout_constraintStart_toStartOf="@id/descTextBox" />
 
     <EditText
-        android:id="@+id/smallTextBox"
+        android:id="@+id/titleTextBox"
         android:layout_width="333dp"
         android:layout_height="55dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="216dp"
         android:background="@drawable/rounded_edittext"
         android:hint="Judul"
         android:inputType="text"
         android:padding="12dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/largeTextBox"
+        android:id="@+id/descTextBox"
         android:layout_width="338dp"
         android:layout_height="236dp"
         android:background="@drawable/rounded_edittext"
@@ -70,7 +96,7 @@
         app:layout_constraintHeight_percent="0.6"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/smallTextBox"
+        app:layout_constraintTop_toBottomOf="@id/titleTextBox"
         app:layout_constraintVertical_bias="0.321" />
 
     <Button

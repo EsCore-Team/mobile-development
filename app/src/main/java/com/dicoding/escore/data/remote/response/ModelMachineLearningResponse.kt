@@ -4,6 +4,12 @@ import com.google.gson.annotations.SerializedName
 
 data class ModelMachineLearningResponse(
 
+	@field:SerializedName("createdAt")
+	val createdAt: String? = null,
+
+	@field:SerializedName("user_email")
+	val userEmail: String? = null,
+
 	@field:SerializedName("essay")
 	val essay: String? = null,
 
@@ -14,7 +20,10 @@ data class ModelMachineLearningResponse(
 	val error: Boolean? = null,
 
 	@field:SerializedName("message")
-	val message: String? = null
+	val message: String? = null,
+
+	@field:SerializedName("title")
+	val title: String? = null
 )
 
 data class PredictedResult(
@@ -23,5 +32,8 @@ data class PredictedResult(
 	val score: Int? = null,
 
 	@field:SerializedName("suggestion")
-	val suggestion: String? = null
+	val suggestion: String? = null,
+
+	@field:SerializedName("raw_score")
+	val rawScore: Any? = null
 )

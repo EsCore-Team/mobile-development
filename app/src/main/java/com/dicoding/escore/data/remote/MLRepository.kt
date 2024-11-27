@@ -9,10 +9,10 @@ import retrofit2.HttpException
 class MLRepository private constructor(
     private val apiService : ApiService
 ) {
-    suspend fun predictML(essay: String): Result<ModelMachineLearningResponse>{
+    suspend fun predictML(userEmail: String, title: String,essay: String): Result<ModelMachineLearningResponse>{
         return withContext(Dispatchers.IO){
             try {
-                val response = apiService.predict(essay)
+                val response = apiService.predict(userEmail, title, essay)
                 if (response.error == false) {
                     Result.Success(response)
                 } else {

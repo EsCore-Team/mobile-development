@@ -4,21 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.dicoding.escore.R
 import com.dicoding.escore.data.remote.Result
-import com.dicoding.escore.databinding.ActivitySignUpBinding
 import com.dicoding.escore.databinding.ActivityUploadBinding
-import com.dicoding.escore.view.ViewModelFactory
+import com.dicoding.escore.pref.SessionManager
 import com.dicoding.escore.view.ViewModelFactoryML
-import com.dicoding.escore.view.login.LoginActivity
 import com.dicoding.escore.view.resultUpload.ResultUploadActivity
-import com.dicoding.escore.view.signup.SignUpActivity
-import com.dicoding.escore.view.signup.SignUpViewModel
 
 //class UploadActivity : AppCompatActivity() {
 //
@@ -91,13 +84,33 @@ class UploadActivity : AppCompatActivity() {
         binding = ActivityUploadBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Inisialisasi SessionManager
+        val sessionManager = SessionManager(this)
+        val userEmail = sessionManager.getUserEmail()
+
+        if (userEmail != null) {
+            // Isi EditText userTextBox dengan email pengguna
+            binding.userTextBox.setText(userEmail)
+        } else {
+            // Berikan placeholder atau hint jika email tidak ditemukan
+            binding.userTextBox.hint = getString(R.string.email_not_found)
+        }
+
+
         binding.submitButton.setOnClickListener {
-            val text = binding.largeTextBox.text.toString().trim()
-            viewModel.predict(text)
+
+            val textEmail = binding.userTextBox.text.toString().trim()
+            val textTitle = binding.titleTextBox.text.toString().trim()
+            val textDesc = binding.descTextBox.text.toString().trim()
+
+            // Panggil fungsi ViewModel dengan email, title, dan desc
+            viewModel.predict(textEmail, textTitle, textDesc)
+
         }
 
         observeViewModel()
     }
+
 
     private fun observeViewModel() {
         viewModel.isLoading.observe(this) { isLoading ->
