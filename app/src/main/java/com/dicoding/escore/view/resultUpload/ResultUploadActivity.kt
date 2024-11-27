@@ -11,6 +11,24 @@ import com.dicoding.escore.databinding.ActivityResultUploadBinding
 import com.dicoding.escore.databinding.ActivityUploadBinding
 import com.dicoding.escore.view.main.MainActivity
 
+//class ResultUploadActivity : AppCompatActivity() {
+//    private lateinit var binding: ActivityResultUploadBinding
+//
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        binding = ActivityResultUploadBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
+//    }
+//
+//    override fun onBackPressed() {
+//        super.onBackPressed()
+//        val intent = Intent(this, MainActivity::class.java)
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+//        startActivity(intent)
+//        finish()
+//    }
+//}
+
 class ResultUploadActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultUploadBinding
 
@@ -18,6 +36,12 @@ class ResultUploadActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityResultUploadBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Ambil hasil prediksi dari intent
+        val result = intent.getStringExtra("PREDICT_RESULT") ?: "Hasil tidak tersedia"
+
+        // Tampilkan hasil pada TextView
+        binding.textResultUpload.text = result
     }
 
     override fun onBackPressed() {
