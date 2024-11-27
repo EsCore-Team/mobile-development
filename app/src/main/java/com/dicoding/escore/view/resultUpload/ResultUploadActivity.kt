@@ -37,11 +37,12 @@ class ResultUploadActivity : AppCompatActivity() {
         binding = ActivityResultUploadBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Ambil hasil prediksi dari intent
-        val result = intent.getStringExtra("PREDICT_RESULT") ?: "Hasil tidak tersedia"
+        // Ambil hasil score dan suggestion dari intent
+        val score = intent.getStringExtra("PREDICT_RESULT") ?: "Hasil tidak tersedia"
+        val suggestion = intent.getStringExtra("PREDICT_SUGGESTION") ?: "Tidak ada saran"
 
         // Tampilkan hasil pada TextView
-        binding.textResultUpload.text = result
+        binding.textResultUpload.text = "Skor Prediksi: $score\nSaran: $suggestion"
     }
 
     override fun onBackPressed() {

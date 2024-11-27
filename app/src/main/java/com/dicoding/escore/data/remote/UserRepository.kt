@@ -1,6 +1,7 @@
 package com.dicoding.escore.data.remote
 
 import com.dicoding.escore.data.remote.response.LoginResponse
+import com.dicoding.escore.data.remote.response.ModelMachineLearningResponse
 import com.dicoding.escore.data.remote.response.SignUpResponse
 import com.dicoding.escore.data.remote.retrofit.ApiService
 import kotlinx.coroutines.Dispatchers

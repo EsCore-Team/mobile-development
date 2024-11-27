@@ -24,5 +24,4 @@ class SignUpViewModel(private val repository: UserRepository): ViewModel() {
             _isLoading.value = false
         }
     }
-
 }

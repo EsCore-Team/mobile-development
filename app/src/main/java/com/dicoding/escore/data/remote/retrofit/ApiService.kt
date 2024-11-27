@@ -1,6 +1,7 @@
 package com.dicoding.escore.data.remote.retrofit
 
 import com.dicoding.escore.data.remote.response.LoginResponse
+import com.dicoding.escore.data.remote.response.ModelMachineLearningResponse
 import com.dicoding.escore.data.remote.response.SignUpResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -22,4 +23,10 @@ interface ApiService {
         @Field("email") email: String,
         @Field("password") password: String
     ): LoginResponse
+
+    @FormUrlEncoded
+    @POST("predict")
+    suspend fun predict(
+        @Field("essay") essay: String
+    ): ModelMachineLearningResponse
 }

@@ -21,6 +21,7 @@ android {
         val properties = Properties()
         properties.load(rootProject.file("local.properties").inputStream())
         buildConfigField("String", "API_APP", properties.getProperty("API_APP"))
+        buildConfigField("String", "API_ML_APP", properties.getProperty("API_ML_APP"))
     }
 
     buildTypes {
