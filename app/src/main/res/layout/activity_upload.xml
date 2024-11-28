@@ -7,39 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".view.upload.UploadActivity">
 
-    <!-- ProgressBar -->
-
-    <TextView
-        android:id="@+id/userEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Email"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/userTextBox"
-        app:layout_constraintStart_toStartOf="@+id/userTextBox" />
-
-    <EditText
-        android:id="@+id/userTextBox"
-        android:layout_width="333dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="128dp"
-        android:background="@drawable/rounded_edittext"
-        android:hint="Judul"
-        android:inputType="text"
-        android:padding="12dp"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/titleLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Judul"
+        android:text="Title"
         android:textStyle="bold"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/titleTextBox"
@@ -50,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Deskripsi"
+        android:text="Description"
         android:textStyle="bold"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/descTextBox"
@@ -62,7 +35,7 @@
         android:layout_height="55dp"
         android:layout_marginTop="216dp"
         android:background="@drawable/rounded_edittext"
-        android:hint="Judul"
+        android:hint="Title"
         android:inputType="text"
         android:padding="12dp"
         android:textSize="16sp"
@@ -77,7 +50,7 @@
         android:layout_height="236dp"
         android:background="@drawable/rounded_edittext"
         android:gravity="top"
-        android:hint="Deskripsi"
+        android:hint="Description"
         android:inputType="textMultiLine"
         android:padding="12dp"
         android:textSize="16sp"

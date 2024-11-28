@@ -83,4 +83,5 @@
     </string>
     <string name="result_label">Result: %1$s</string>
     <string name="sugestion_result">Sugestion: %1$s</string>
+    <string name="user_name">User Name</string>
 </resources>

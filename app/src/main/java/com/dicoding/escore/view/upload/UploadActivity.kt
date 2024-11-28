@@ -86,25 +86,20 @@ class UploadActivity : AppCompatActivity() {
 
         // Inisialisasi SessionManager
         val sessionManager = SessionManager(this)
-        val userEmail = sessionManager.getUserEmail()
-
-        if (userEmail != null) {
-            // Isi EditText userTextBox dengan email pengguna
-            binding.userTextBox.setText(userEmail)
-        } else {
-            // Berikan placeholder atau hint jika email tidak ditemukan
-            binding.userTextBox.hint = getString(R.string.email_not_found)
-        }
-
 
         binding.submitButton.setOnClickListener {
 
-            val textEmail = binding.userTextBox.text.toString().trim()
+            val userEmail = sessionManager.getUserEmail()
             val textTitle = binding.titleTextBox.text.toString().trim()
             val textDesc = binding.descTextBox.text.toString().trim()
 
             // Panggil fungsi ViewModel dengan email, title, dan desc
-            viewModel.predict(textEmail, textTitle, textDesc)
+            if (userEmail != null) {
+                viewModel.predict(userEmail, textTitle, textDesc)
+            }   else {
+                // Tampilkan pesan error jika email tidak ditemukan
+                Toast.makeText(this, "Email tidak ditemukan. Silakan login ulang.", Toast.LENGTH_SHORT).show()
+            }
 
         }
 
