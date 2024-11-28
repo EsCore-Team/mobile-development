@@ -6,4 +6,5 @@
     </style>
 
     <style name="Theme.EsCore" parent="Base.Theme.EsCore" />
+
 </resources>
