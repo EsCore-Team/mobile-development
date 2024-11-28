@@ -11,20 +11,10 @@
         android:label="fragment_guide"
         tools:layout="@layout/fragment_guide" />
     <fragment
-        android:id="@+id/navigation_history"
-        android:name="com.dicoding.escore.view.bottombar.history.HistoryFragment"
-        android:label="fragment_history"
-        tools:layout="@layout/fragment_history" />
-    <fragment
         android:id="@+id/navigation_home"
         android:name="com.dicoding.escore.view.bottombar.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
-    <fragment
-        android:id="@+id/navigation_notification"
-        android:name="com.dicoding.escore.view.bottombar.notification.NotificationFragment"
-        android:label="fragment_notification"
-        tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.dicoding.escore.view.bottombar.profile.ProfileFragment"

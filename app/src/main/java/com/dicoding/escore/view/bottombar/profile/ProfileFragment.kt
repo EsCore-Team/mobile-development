@@ -11,11 +11,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.escore.R
-import com.dicoding.escore.databinding.FragmentNotificationBinding
 import com.dicoding.escore.databinding.FragmentProfileBinding
 import com.dicoding.escore.pref.SessionManager
 import com.dicoding.escore.view.ViewModelFactory
-import com.dicoding.escore.view.bottombar.notification.NotificationViewModel
 import com.dicoding.escore.view.onboarding.OnboardingActivity
 
 //class ProfileFragment : Fragment() {
@@ -102,10 +100,16 @@ class ProfileFragment : Fragment() {
         val factory = ViewModelFactory.getInstance(requireContext())
         profileViewModel = ViewModelProvider(this, factory).get(ProfileViewModel::class.java)
 
-        // Observe LiveData dari ProfileViewModel
-        profileViewModel.text.observe(viewLifecycleOwner) { email ->
-            binding.textProfile.text = email
+        // Observe LiveData untuk fullName
+        profileViewModel.fullName.observe(viewLifecycleOwner) { fullName ->
+            binding.userName.text = fullName
         }
+
+        // Observe LiveData untuk email
+        profileViewModel.email.observe(viewLifecycleOwner) { email ->
+            binding.userEmail.text = email
+        }
+
 
         setupAction()
         return root

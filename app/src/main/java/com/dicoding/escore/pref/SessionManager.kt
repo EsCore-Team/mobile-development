@@ -11,6 +11,7 @@ class SessionManager(context: Context) {
         private const val PREF_NAME = "user_session"
         private const val TOKEN_KEY = "auth_token"
         private const val EMAIL_KEY = "user_email" // Tambahkan key untuk email
+        private const val FULLNAME_KEY = "user_fullname" // Key untuk fullName
     }
     fun saveAuthToken(token: String) {
         preferences.edit().putString(TOKEN_KEY, token).apply()
@@ -37,5 +38,14 @@ class SessionManager(context: Context) {
     // Hapus email
     fun clearUserEmail() {
         preferences.edit().remove(EMAIL_KEY).apply()
+    }
+
+    fun saveUserFullName(fullName: String) {
+        preferences.edit().putString(FULLNAME_KEY, fullName).apply()
+    }
+
+    // Ambil fullName
+    fun getUserFullName(): String? {
+        return preferences.getString(FULLNAME_KEY, null)
     }
 }

@@ -6,9 +6,13 @@ import androidx.lifecycle.ViewModel
 import com.dicoding.escore.pref.SessionManager
 
 class ProfileViewModel(private val sessionManager: SessionManager) : ViewModel() {
-    private val _text = MutableLiveData<String>().apply {
-        val email = sessionManager.getUserEmail() ?: "Email tidak tersedia"
-        value = email
+    private val _email = MutableLiveData<String>().apply {
+        value = sessionManager.getUserEmail() ?: "Email tidak tersedia"
     }
-    val text: LiveData<String> = _text
+    val email: LiveData<String> = _email
+
+    private val _fullName = MutableLiveData<String>().apply {
+        value = sessionManager.getUserFullName() ?: "Nama lengkap tidak tersedia"
+    }
+    val fullName: LiveData<String> = _fullName
 }

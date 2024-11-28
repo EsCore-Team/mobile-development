@@ -84,4 +84,9 @@
     <string name="result_label">Result: %1$s</string>
     <string name="sugestion_result">Sugestion: %1$s</string>
     <string name="user_name">User Name</string>
+    <string name="avatar">Avatar</string>
+    <string name="user_email">User Email</string>
+    <string name="enter_your_essay_title_here">Enter your Essay title here</string>
+    <string name="description">Description</string>
+    <string name="write_your_essay_here">Write your essay here!</string>
 </resources>
