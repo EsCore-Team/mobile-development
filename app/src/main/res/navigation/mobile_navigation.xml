@@ -8,16 +8,16 @@
     <fragment
         android:id="@+id/navigation_guide"
         android:name="com.dicoding.escore.view.bottombar.guide.GuideFragment"
-        android:label="fragment_guide"
+        android:label="Guide"
         tools:layout="@layout/fragment_guide" />
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.dicoding.escore.view.bottombar.home.HomeFragment"
-        android:label="fragment_home"
+        android:label="Home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.dicoding.escore.view.bottombar.profile.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

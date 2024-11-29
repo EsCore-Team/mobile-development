@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".view.bottombar.guide.GuideFragment">
 
+
     <TextView
         android:id="@+id/text_guide"
         android:layout_width="match_parent"

@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.dicoding.escore.R
 import com.dicoding.escore.data.remote.Result
 import com.dicoding.escore.databinding.ActivityUploadBinding
@@ -86,6 +87,10 @@ class UploadActivity : AppCompatActivity() {
 
         // Inisialisasi SessionManager
         val sessionManager = SessionManager(this)
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar) // Set Toolbar as the ActionBar
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         binding.submitButton.setOnClickListener {
 

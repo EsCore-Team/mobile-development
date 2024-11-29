@@ -6,10 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".view.bottombar.profile.ProfileFragment">
 
-    <!-- Avatar Image -->
-
-    <!-- User Name -->
-
     <ImageView
         android:id="@+id/avatar_image"
         android:layout_width="142dp"

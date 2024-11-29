@@ -3,9 +3,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#B8B8B8</color>
+    <color name="colorPrimary">#4A628A</color>
     <color name="navy">#2D3D4F</color>
     <color name="navy_text">#083554</color>
     <color name="hyperlink">#005994</color>
     <color name="button">#4A628A</color>
     <color name="red">#FF0000</color>
+    <color name="text_toolbar">#7AB2D3</color>
 </resources>
