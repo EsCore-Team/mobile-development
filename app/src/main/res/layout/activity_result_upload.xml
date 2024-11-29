@@ -22,5 +22,111 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Title Section -->
+    <TextView
+        android:id="@+id/tv_result_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/essay_title"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_essay_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/essay_title_user"
+        android:textSize="16sp"
+        android:textColor="?android:attr/textColorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_result_title" />
+
+    <!-- Score Section -->
+    <TextView
+        android:id="@+id/tv_score_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Score"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_essay_title" />
+
+    <TextView
+        android:id="@+id/tv_score_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="5/6"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_green_dark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_score_label" />
+
+    <!-- Rubric Description Section -->
+    <TextView
+        android:id="@+id/tv_rubric_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/rubric_description"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_score_value" />
+
+    <EditText
+        android:id="@+id/et_rubric_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_edittext"
+        android:gravity="top"
+        android:hint="@string/lorem_ipsum_short"
+        android:inputType="textMultiLine"
+        android:minHeight="120dp"
+        android:padding="12dp"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_rubric_label" />
+
+    <!-- Buttons Section -->
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/black"
+        android:text="Save Feedback"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_rubric_description" />
+
+    <Button
+        android:id="@+id/btn_return_home"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/back_to_home"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_save" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

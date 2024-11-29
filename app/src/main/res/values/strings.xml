@@ -90,4 +90,5 @@
     <string name="description">Description</string>
     <string name="write_your_essay_here">Write your essay here!</string>
     <string name="upload">Upload Essay</string>
+    <string name="back_to_home">Back to home</string>
 </resources>
