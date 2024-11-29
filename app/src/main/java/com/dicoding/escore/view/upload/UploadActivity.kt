@@ -113,11 +113,14 @@ class UploadActivity : AppCompatActivity() {
 
 
     private fun observeViewModel() {
+        val sessionManager = SessionManager(this) // Inisialisasi SessionManager
+
         viewModel.isLoading.observe(this) { isLoading ->
             showLoading(isLoading)
         }
+
         viewModel.predictResult.observe(this) { result ->
-            when(result) {
+            when (result) {
                 is Result.Loading -> {
                     showLoading(true)
                 }
@@ -125,6 +128,13 @@ class UploadActivity : AppCompatActivity() {
                     showLoading(false)
                     val score = result.data.predictedResult?.score ?: 0 // Nilai default jika null
                     val suggestion = result.data.predictedResult?.suggestion ?: "Tidak ada saran" // Nilai default jika null
+                    val title = result.data.title ?: "Judul tidak tersedia" // Nilai default jika null
+                    val description = result.data.essay ?: "Deskripsi tidak tersedia" // Nilai default jika null
+
+                    // Simpan title dan description ke SessionManager
+                    sessionManager.saveEssayTitle(title)
+                    sessionManager.saveEssayDescription(description)
+
                     Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
 
                     val intent = Intent(this@UploadActivity, ResultUploadActivity::class.java).apply {
@@ -134,8 +144,6 @@ class UploadActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
-
-
                 is Result.Error -> {
                     showLoading(false)
                     Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
@@ -143,6 +151,7 @@ class UploadActivity : AppCompatActivity() {
             }
         }
     }
+
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
