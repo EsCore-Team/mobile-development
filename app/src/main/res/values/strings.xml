@@ -132,4 +132,7 @@
     An essay in this category demonstrates very little or no mastery and is severely flawed by one or more of the following weaknesses: develops no viable point of view on the issue, or provides little or no evidence to support its position; the essay is disorganized or unfocused, resulting in a disjointed or incoherent essay; the essay displays fundamental errors in vocabulary and/or demonstrates severe flaws in sentence structure; the essay contains pervasive errors in grammar, usage, or mechanics that persistently interfere with meaning.
     </string>
     <string name="guide_title">Holistic Rating for Source-Based Writing</string>
+    <string name="arrow_icon">Arrow Icon</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="history_item_title">History Item Title</string>
 </resources>
