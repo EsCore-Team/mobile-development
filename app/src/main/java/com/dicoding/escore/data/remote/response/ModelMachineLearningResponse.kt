@@ -29,7 +29,7 @@ data class ModelMachineLearningResponse(
 data class PredictedResult(
 
 	@field:SerializedName("score")
-	val score: Int? = null,
+	val score: String? = null,
 
 	@field:SerializedName("suggestion")
 	val suggestion: String? = null,

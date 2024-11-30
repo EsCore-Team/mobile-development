@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -37,146 +38,129 @@
         android:layout_height="1dp"
         android:elevation="2dp"
         android:background="@color/gray"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Title -->
-    <TextView
-        android:id="@+id/tv_result_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/title"
-        android:textColor="@color/black"
-        android:paddingHorizontal="15dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_divider" />
-
-    <!-- Essay Title -->
-    <TextView
-        android:id="@+id/tv_essay_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/rounded_edittext"
-        android:hint="Title"
-        android:gravity="top"
-        android:padding="12dp"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_result_title" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-
-    <!-- Description Section -->
-    <TextView
-        android:id="@+id/tv_description_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:paddingHorizontal="15dp"
-        android:text="Description"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_essay_title" />
-
-    <TextView
-        android:id="@+id/description"
+    <!-- Scrollable Content -->
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="121dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/rounded_edittext"
-        android:gravity="top"
-        android:hint="Description content goes here"
-        android:padding="12dp"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="14sp"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_description_label" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar_divider"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <!-- Score Section -->
-    <TextView
-        android:id="@+id/tv_score_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:paddingHorizontal="15dp"
-        android:text="Score"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/description" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <TextView
-        android:id="@+id/text_result_upload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:paddingHorizontal="15dp"
-        android:text="@string/_5_6"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/holo_green_dark"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_score_label" />
+            <!-- Title -->
+            <TextView
+                android:id="@+id/tv_result_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/title"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    <!-- Rubric Section -->
-    <TextView
-        android:id="@+id/tv_rubric_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:paddingHorizontal="15dp"
-        android:text="@string/suggestion"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_result_upload" />
+            <!-- Essay Title -->
+            <TextView
+                android:id="@+id/tv_essay_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_edittext"
+                android:hint="Title"
+                android:gravity="top"
+                android:padding="12dp"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="14sp"
+                android:textIsSelectable="true"/>
 
-    <TextView
-        android:id="@+id/suggestion"
-        android:layout_width="0dp"
-        android:layout_height="121dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/rounded_edittext"
-        android:gravity="top"
-        android:hint="@string/this_is_essay"
-        android:padding="12dp"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_rubric_label" />
+            <!-- Description Section -->
+            <TextView
+                android:id="@+id/tv_description_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Description"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/black" />
 
-    <!-- Button -->
-    <Button
-        android:id="@+id/btn_return_home"
-        android:layout_width="0dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:text="@string/back_to_home"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/suggestion" />
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_edittext"
+                android:gravity="top"
+                android:hint="Description content goes here"
+                android:padding="12dp"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="14sp"
+                android:textIsSelectable="true"/>
 
+            <!-- Score Section -->
+            <TextView
+                android:id="@+id/tv_score_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Score"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_result_upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/_5_6"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/holo_green_dark" />
+
+            <!-- Rubric Section -->
+            <TextView
+                android:id="@+id/tv_rubric_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/suggestion"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/suggestion"
+                android:layout_width="match_parent"
+                android:layout_height="121dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_edittext"
+                android:gravity="top"
+                android:hint="@string/this_is_essay"
+                android:padding="12dp"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="14sp"
+                android:textIsSelectable="true"/>
+
+            <!-- Button -->
+            <Button
+                android:id="@+id/btn_return_home"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/back_to_home"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
