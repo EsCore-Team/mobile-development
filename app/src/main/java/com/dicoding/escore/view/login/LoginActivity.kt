@@ -67,8 +67,12 @@ class LoginActivity : AppCompatActivity() {
                 is Result.Success -> {
                     showLoading(false)
                     val token = result.data.loginResult.token
+                    val email = result.data.loginResult.email ?: "Email tidak tersedia"
+                    val fullName = result.data.loginResult.fullName ?: "Nama tidak tersedia"
                     lifecycleScope.launch {
                         sessionManager.saveAuthToken(token)
+                        sessionManager.saveUserEmail(email)
+                        sessionManager.saveUserFullName(fullName)
                     }
                     Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
 

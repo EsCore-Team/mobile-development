@@ -7,19 +7,9 @@
         android:title="@string/guide" />
 
     <item
-        android:id="@+id/navigation_history"
-        android:icon="@drawable/history"
-        android:title="@string/history" />
-
-    <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/home"
         android:title="@string/home" />
-
-    <item
-        android:id="@+id/navigation_notification"
-        android:icon="@drawable/notif"
-        android:title="@string/notification" />
 
     <item
         android:id="@+id/navigation_profile"

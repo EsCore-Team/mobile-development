@@ -1,6 +1,8 @@
 package com.dicoding.escore.data.remote
 
+import com.dicoding.escore.data.remote.response.HistoryResponse
 import com.dicoding.escore.data.remote.response.LoginResponse
+import com.dicoding.escore.data.remote.response.ModelMachineLearningResponse
 import com.dicoding.escore.data.remote.response.SignUpResponse
 import com.dicoding.escore.data.remote.retrofit.ApiService
 import kotlinx.coroutines.Dispatchers
@@ -39,6 +41,20 @@ class UserRepository private constructor(
                 Result.Error("${e.message}")
             }
         }
+    }
+
+    suspend fun getHistory(
+        email: String,
+        createdAt: String,
+        title: String,
+        score: String
+    ): HistoryResponse {
+        return apiService.history(
+            email = email,
+            createdAt = createdAt,
+            title = title,
+            score = score
+        )
     }
 
     companion object {

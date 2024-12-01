@@ -21,6 +21,7 @@ android {
         val properties = Properties()
         properties.load(rootProject.file("local.properties").inputStream())
         buildConfigField("String", "API_APP", properties.getProperty("API_APP"))
+        buildConfigField("String", "API_ML_APP", properties.getProperty("API_ML_APP"))
     }
 
     buildTypes {
@@ -42,6 +43,7 @@ android {
     buildFeatures {
         viewBinding = true
         buildConfig = true
+        mlModelBinding = true
     }
 }
 
@@ -68,5 +70,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
+    implementation(libs.tensorflow.lite.support)
+    implementation(libs.tensorflow.lite.metadata)
 
 }
