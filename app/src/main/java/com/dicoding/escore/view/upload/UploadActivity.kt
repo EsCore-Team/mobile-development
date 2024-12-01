@@ -14,66 +14,6 @@ import com.dicoding.escore.pref.SessionManager
 import com.dicoding.escore.view.ViewModelFactoryML
 import com.dicoding.escore.view.resultUpload.ResultUploadActivity
 
-//class UploadActivity : AppCompatActivity() {
-//
-//    private lateinit var binding: ActivityUploadBinding
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        binding = ActivityUploadBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
-//
-//        binding.submitButton.setOnClickListener {
-////            Ubah disini
-//
-//        }
-//    }
-//}
-
-//class UploadActivity : AppCompatActivity(), ClassifierListener {
-//
-//    private lateinit var binding: ActivityUploadBinding
-//    private lateinit var textClassifierHelper: TextClassifierHelper
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        binding = ActivityUploadBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
-//
-//        // Inisialisasi TextClassifierHelper
-//        textClassifierHelper = TextClassifierHelper(
-//            context = this,
-//            classifierListener = this // Set listener ke activity ini
-//        )
-//
-//        binding.submitButton.setOnClickListener {
-//            val inputText = binding.largeTextBox.text.toString()
-//
-//            if (inputText.isNotBlank()) {
-//                textClassifierHelper.classifyText(inputText) // Lakukan klasifikasi
-//            } else {
-//                Toast.makeText(this, "Masukkan teks terlebih dahulu!", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    }
-//
-//    // Implementasi callback hasil
-//    override fun onResult(result: String) {
-//        runOnUiThread {
-//            // Pindah ke ResultUploadActivity dengan hasil prediksi
-//            val intent = Intent(this, ResultUploadActivity::class.java)
-//            intent.putExtra("PREDICT_RESULT", result) // Kirim hasil prediksi
-//            startActivity(intent)
-//        }
-//    }
-//
-//    override fun onError(error: String) {
-//        runOnUiThread {
-//            Toast.makeText(this, "Terjadi kesalahan: $error", Toast.LENGTH_LONG).show()
-//        }
-//    }
-//}
-
 class UploadActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUploadBinding
 
@@ -126,10 +66,10 @@ class UploadActivity : AppCompatActivity() {
                 }
                 is Result.Success -> {
                     showLoading(false)
-                    val score = result.data.predictedResult?.score ?: 0 // Nilai default jika null
-                    val suggestion = result.data.predictedResult?.suggestion ?: "Tidak ada saran" // Nilai default jika null
-                    val title = result.data.title ?: "Judul tidak tersedia" // Nilai default jika null
-                    val description = result.data.essay ?: "Deskripsi tidak tersedia" // Nilai default jika null
+                    val score = result.data.result?.predictedResult?.score ?: 0 // Nilai default jika null
+                    val suggestion = result.data.result?.predictedResult?.suggestion ?: "Tidak ada saran" // Nilai default jika null
+                    val title = result.data.result?.title ?: "Judul tidak tersedia" // Nilai default jika null
+                    val description = result.data.result?.essay ?: "Deskripsi tidak tersedia" // Nilai default jika null
 
                     // Simpan title dan description ke SessionManager
                     sessionManager.saveEssayTitle(title)
