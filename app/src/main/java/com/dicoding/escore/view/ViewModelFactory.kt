@@ -5,11 +5,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.escore.data.remote.UserRepository
 import com.dicoding.escore.di.Injection
+import com.dicoding.escore.pref.SessionManager
+import com.dicoding.escore.view.bottombar.profile.ProfileViewModel
+import com.dicoding.escore.view.history.HistoryViewModel
 import com.dicoding.escore.view.login.LoginViewModel
 import com.dicoding.escore.view.main.MainViewModel
 import com.dicoding.escore.view.signup.SignUpViewModel
+import com.dicoding.escore.view.upload.UploadViewModel
 
-class ViewModelFactory(private val repository: UserRepository) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory(
+    private val repository: UserRepository,
+    private val sessionManager: SessionManager
+) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -23,7 +30,12 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
             modelClass.isAssignableFrom(SignUpViewModel::class.java) -> {
                 SignUpViewModel(repository) as T
             }
-
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
+                ProfileViewModel(sessionManager) as T
+            }
+            modelClass.isAssignableFrom(HistoryViewModel::class.java) -> {
+                HistoryViewModel(repository, sessionManager) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
@@ -35,7 +47,8 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
         fun getInstance(context: Context): ViewModelFactory {
             if (INSTANCE == null) {
                 synchronized(ViewModelFactory::class.java) {
-                    INSTANCE = ViewModelFactory(Injection.provideRepository(context))
+                    val sessionManager = SessionManager(context)
+                    INSTANCE = ViewModelFactory(Injection.provideRepository(context), sessionManager)
                 }
             }
             return INSTANCE as ViewModelFactory

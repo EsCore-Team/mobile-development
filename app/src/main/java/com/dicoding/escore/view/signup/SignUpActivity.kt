@@ -106,11 +106,11 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun playAnimation() {
-//        ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
-//            duration = 6000
-//            repeatCount = ObjectAnimator.INFINITE
-//            repeatMode = ObjectAnimator.REVERSE
-//        }.start()
+        ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
+            duration = 6000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
 
         val title = ObjectAnimator.ofFloat(binding.titleTextView, View.ALPHA, 1f).setDuration(200)
         val nameText = ObjectAnimator.ofFloat(binding.nameTextView, View.ALPHA, 1f).setDuration(200)

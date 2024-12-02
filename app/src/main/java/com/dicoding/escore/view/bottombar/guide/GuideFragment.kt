@@ -10,8 +10,6 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.escore.R
 import com.dicoding.escore.databinding.FragmentGuideBinding
-import com.dicoding.escore.databinding.FragmentHistoryBinding
-import com.dicoding.escore.view.bottombar.history.HistoryViewModel
 
 class GuideFragment : Fragment() {
 
@@ -32,10 +30,10 @@ class GuideFragment : Fragment() {
         _binding = FragmentGuideBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textGuide
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+//        val textView: TextView = binding.textGuide
+//        homeViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
         return root
     }
 

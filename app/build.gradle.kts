@@ -12,6 +12,7 @@ android {
     defaultConfig {
         applicationId = "com.dicoding.escore"
         minSdk = 21
+        //noinspection OldTargetApi
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -21,6 +22,7 @@ android {
         val properties = Properties()
         properties.load(rootProject.file("local.properties").inputStream())
         buildConfigField("String", "API_APP", properties.getProperty("API_APP"))
+        buildConfigField("String", "API_ML_APP", properties.getProperty("API_ML_APP"))
     }
 
     buildTypes {
@@ -42,11 +44,11 @@ android {
     buildFeatures {
         viewBinding = true
         buildConfig = true
+        mlModelBinding = true
     }
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -56,11 +58,10 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-//  library
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
@@ -68,9 +69,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
-
-
-    implementation (libs.material.v190)
-
-
+    implementation (libs.tensorflow.lite)
+    implementation (libs.tensorflow.lite.metadata)
+    implementation (libs.androidx.activity.ktx.v172)
 }

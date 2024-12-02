@@ -6,11 +6,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.dicoding.escore.R
 import com.dicoding.escore.databinding.ActivityLoginBinding
@@ -41,7 +38,6 @@ class LoginActivity : AppCompatActivity() {
 
             if (isInputValid(email, password)) {
                 viewModel.login(email, password)
-//                navigateToMainActivity()
             }
         }
         playAnimation()
@@ -67,8 +63,12 @@ class LoginActivity : AppCompatActivity() {
                 is Result.Success -> {
                     showLoading(false)
                     val token = result.data.loginResult.token
+                    val email = result.data.loginResult.email ?: "Email tidak tersedia"
+                    val fullName = result.data.loginResult.fullName ?: "Nama tidak tersedia"
                     lifecycleScope.launch {
                         sessionManager.saveAuthToken(token)
+                        sessionManager.saveUserEmail(email)
+                        sessionManager.saveUserFullName(fullName)
                     }
                     Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
 
@@ -114,11 +114,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun playAnimation() {
-//        ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
-//            duration = 6000
-//            repeatCount = ObjectAnimator.INFINITE
-//            repeatMode = ObjectAnimator.REVERSE
-//        }.start()
+        ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
+            duration = 6000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
 
         val title = ObjectAnimator.ofFloat(binding.titleTextView, View.ALPHA, 1f).setDuration(200)
         val emailTextView = ObjectAnimator.ofFloat(binding.emailTextView, View.ALPHA, 1f).setDuration(200)

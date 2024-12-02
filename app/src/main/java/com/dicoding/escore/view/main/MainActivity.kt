@@ -1,14 +1,14 @@
 package com.dicoding.escore.view.main
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.view.Gravity
+import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var sessionManager: SessionManager
+    private lateinit var toolbarTitle: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,61 +35,49 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         sessionManager = SessionManager(this)
-
         checkSession()
-//
-//        setupAction()
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar) // Set Toolbar as the ActionBar
-        val navView: BottomNavigationView = binding.navView
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
+        toolbarTitle = TextView(this).apply {
+            textSize = 18f
+            setTextColor(Color.WHITE)
+            typeface = Typeface.DEFAULT_BOLD
+            gravity = Gravity.CENTER
+        }
+
+        val layoutParams = Toolbar.LayoutParams(
+            Toolbar.LayoutParams.WRAP_CONTENT,
+            Toolbar.LayoutParams.WRAP_CONTENT
+        ).apply {
+            gravity = Gravity.CENTER
+        }
+        toolbar.addView(toolbarTitle, layoutParams)
+
+        val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_guide, R.id.navigation_history, R.id.navigation_home, R.id.navigation_notification, R.id.navigation_profile
+                R.id.navigation_guide, R.id.navigation_home, R.id.navigation_profile
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            toolbarTitle.text = destination.label
+        }
     }
 
     private fun checkSession() {
         val token = sessionManager.getAuthToken()
         if (token == null) {
-            // Jika token tidak ada, navigasi ke layar login
             navigateToLogin()
         }
     }
-//
-//    private fun setupAction() {
-//        binding.logoutButton.setOnClickListener {
-//            showLogoutConfirmation()
-//            true
-//        }
-//    }
-//
-//    private fun showLogoutConfirmation() {
-//        AlertDialog.Builder(this)
-//            .setTitle(getString(R.string.confirm_logout))
-//            .setMessage(getString(R.string.are_you_sure_you_want_to_logout))
-//            .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
-//                logout()
-//                dialog.dismiss()
-//            }
-//            .setNegativeButton(getString(R.string.no)) { dialog, _ ->
-//                dialog.dismiss()
-//            }
-//            .show()
-//    }
-//
-//    private fun logout() {
-//        sessionManager.clearAuthToken()
-//        navigateToLogin()
-//    }
-//
+
     private fun navigateToLogin() {
         val intent = Intent(this, OnboardingActivity::class.java)
         startActivity(intent)

@@ -62,7 +62,7 @@ class EmailValidation @JvmOverloads constructor(
             if (parentView is TextInputLayout) {
                 return parentView
             }
-            parentView = (parentView as? ViewParent)?.parent
+            parentView = parentView.parent
         }
         return null
     }
