@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.dicoding.escore.R
 import com.dicoding.escore.data.remote.Result
@@ -57,35 +58,17 @@ class UploadActivity : AppCompatActivity() {
             }
 
             // Panggil fungsi ViewModel dengan email, title, dan desc
-            if (userEmail != null) {
+            if (isInputValid(textTitle, textDesc) && userEmail != null) {
                 viewModel.predict(userEmail, textTitle, textDesc)
-            }   else {
+            } else{
                 // Tampilkan pesan error jika email tidak ditemukan
-                Toast.makeText(this, "Email not found. Please re-login.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please fill the essay", Toast.LENGTH_SHORT).show()
             }
 
         }
 
         observeViewModel()
     }
-
-    private fun setupWordCount() {
-        val maxWords = 1000
-        binding.descTextBox.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val wordCount = s?.trim()?.split("\\s+".toRegex())?.filter { it.isNotEmpty() }?.size ?: 0
-
-                // Update the word count display
-                binding.wordCountDisplay.text = "$wordCount/$maxWords words"
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
-    }
-
-
 
     private fun observeViewModel() {
         val sessionManager = SessionManager(this) // Inisialisasi SessionManager
@@ -126,6 +109,58 @@ class UploadActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun isInputValid(title: String, description: String): Boolean {
+        var isValid = true
+
+        // Validasi untuk title
+        if (title.isEmpty()) {
+            binding.titleTextBox.error = getString(R.string.empty_title)
+            binding.titleTextBox.setBackgroundResource(R.drawable.border_warning) // Terapkan border merah
+            isValid = false
+        } else {
+            binding.titleTextBox.error = null
+            binding.titleTextBox.setBackgroundResource(R.drawable.border_default) // Terapkan border default jika valid
+        }
+
+        // Validasi untuk description (jika kosong)
+        if (description.isEmpty()) {
+            binding.descTextBox.error = getString(R.string.empty_desc)
+            binding.descTextBox.setBackgroundResource(R.drawable.border_warning) // Terapkan border merah
+            isValid = false
+        } else {
+            binding.descTextBox.error = null
+            binding.descTextBox.setBackgroundResource(R.drawable.border_default) // Terapkan border default jika valid
+        }
+
+        return isValid
+    }
+
+    private fun setupWordCount() {
+        val maxWords = 1000
+        binding.descTextBox.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val wordCount = s?.trim()?.split("\\s+".toRegex())?.filter { it.isNotEmpty() }?.size ?: 0
+
+                // Update the word count display
+                binding.wordCountDisplay.text = "$wordCount/$maxWords words"
+
+                // Tambahkan visual feedback jika word count mendekati batas
+                if (wordCount > maxWords) {
+                    binding.wordCountDisplay.setTextColor(ContextCompat.getColor(this@UploadActivity, R.color.red))
+                    binding.descTextBox.setBackgroundResource(R.drawable.border_warning)
+                } else {
+                    binding.wordCountDisplay.setTextColor(ContextCompat.getColor(this@UploadActivity, R.color.black))
+                    binding.descTextBox.setBackgroundResource(R.drawable.border_default)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
+
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE

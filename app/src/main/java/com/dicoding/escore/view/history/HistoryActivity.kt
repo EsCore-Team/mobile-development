@@ -2,7 +2,9 @@ package com.dicoding.escore.view.history
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -83,6 +85,7 @@ class HistoryActivity : AppCompatActivity() {
 
         // Fetch history
         viewModel.fetchHistory(createdAt = "", title = "", score = "")
+
     }
 
     private fun observeViewModel() {

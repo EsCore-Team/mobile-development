@@ -93,19 +93,66 @@
                 android:textSize="18sp"
                 android:textColor="@color/black" />
 
-            <TextView
-                android:id="@+id/description"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:background="@drawable/rounded_edittext"
-                android:gravity="top"
-                android:scrollbars="vertical"
-                android:hint="Description content goes here"
                 android:padding="12dp"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textSize="14sp"
-                android:textIsSelectable="true"/>
+                android:layout_marginTop="8dp">
+
+                <!-- Description Content -->
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Description content goes here"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:maxLines="5"
+                    android:ellipsize="end"
+                    android:textIsSelectable="true"
+                    android:lineSpacingExtra="4dp"
+                    android:scrollbars="vertical" />
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="8dp"
+                    android:background="@color/gray" />
+
+                <!-- More Button with Icon -->
+                <LinearLayout
+                    android:id="@+id/btn_more_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_gravity="end">
+
+                    <TextView
+                        android:id="@+id/btn_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="More..."
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_marginEnd="8dp" />
+
+                    <ImageView
+                        android:id="@+id/icon_more"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/baseline_expand_more_24"
+                        app:tint="@color/navy" />
+                </LinearLayout>
+            </LinearLayout>
+
+
 
             <!-- Score Section -->
             <TextView
@@ -153,7 +200,6 @@
                 android:textSize="14sp"
                 android:textIsSelectable="true"/>
 
-            <!-- Button -->
             <Button
                 android:id="@+id/btn_return_home"
                 android:layout_width="match_parent"
