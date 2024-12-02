@@ -1,6 +1,7 @@
 package com.dicoding.escore.view.detailHistory
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -20,6 +21,7 @@ class DetailHistoryActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityDetailHistoryBinding
+    private var isDescriptionExpanded = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +48,23 @@ class DetailHistoryActivity : AppCompatActivity() {
 
         // Fetch detail
         viewModel.fetchDetailHistory(email, id)
+
+        binding.btnMoreContainer.setOnClickListener {
+            if (isDescriptionExpanded) {
+                // Collapse deskripsi
+                binding.description.maxLines = 5
+                binding.description.ellipsize = TextUtils.TruncateAt.END
+                binding.btnMore.text = "More..."
+                binding.iconMore.setImageResource(R.drawable.baseline_expand_more_24)
+            } else {
+                // Expand deskripsi
+                binding.description.maxLines = Int.MAX_VALUE
+                binding.description.ellipsize = null
+                binding.btnMore.text = "Less"
+                binding.iconMore.setImageResource(R.drawable.baseline_expand_less_24)
+            }
+            isDescriptionExpanded = !isDescriptionExpanded
+        }
     }
 
     private fun observeViewModel() {
