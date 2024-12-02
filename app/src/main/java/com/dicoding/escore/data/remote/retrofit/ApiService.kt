@@ -43,4 +43,10 @@ interface ApiService {
         @Query("title") title: String,
         @Query("score") score: String
     ): HistoryResponse
+
+    @GET("history/{email}")
+    suspend fun getDetailHistory(
+        @Path("email") email: String,
+        @Query("id") id: String
+    ): HistoryResponse
 }

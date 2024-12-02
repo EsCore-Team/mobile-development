@@ -72,5 +72,6 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.tensorflow.lite.support)
     implementation(libs.tensorflow.lite.metadata)
-
+    implementation (libs.pdfbox)
+    implementation (libs.poi.ooxml)
 }
