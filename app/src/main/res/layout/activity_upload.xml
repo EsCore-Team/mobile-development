@@ -105,24 +105,21 @@
         app:layout_constraintTop_toBottomOf="@id/titleTextBox"
         app:layout_constraintVertical_bias="0.222" />
 
+    <!-- Word Count Display -->
 
-    <Button
-        android:id="@+id/uploadButton"
-        android:layout_width="143dp"
+
+    <TextView
+        android:id="@+id/wordCountDisplay"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        android:backgroundTint="@color/upload_button"
-        android:drawableLeft="@drawable/baseline_file_upload_24"
-        android:drawableTint="@color/white"
-        android:text="Upload File"
-        android:textColor="@android:color/white"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@id/submitButton"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
+        android:gravity="end"
+        android:text="0/1000 words"
+        android:textColor="@color/gray"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/descTextBox" />
 
     <Button
         android:id="@+id/submitButton"
