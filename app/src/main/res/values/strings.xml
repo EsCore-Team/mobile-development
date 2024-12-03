@@ -140,4 +140,8 @@
     <string name="desc_onboarding">EsCore is an AI-powered solution for objective and efficient essay scoring. Let’s make grading faster and fairer!</string>
     <string name="welcome_to_escore">🎓 Welcome to EsCore!</string>
     <string name="next_icon">Next Icon</string>
+    <string name="logo">Logo</string>
+    <string name="onboarding_image">Onboarding Image</string>
+    <string name="get_started">Get Started</string>
+    <string name="view_all">View All</string>
 </resources>
