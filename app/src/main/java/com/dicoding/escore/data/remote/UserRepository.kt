@@ -57,6 +57,10 @@ class UserRepository private constructor(
         )
     }
 
+    suspend fun getDetailHistory(email: String, id: String): HistoryResponse {
+        return apiService.getDetailHistory(email, id)
+    }
+
     companion object {
         @Volatile
         private var INSTANCE: UserRepository? = null

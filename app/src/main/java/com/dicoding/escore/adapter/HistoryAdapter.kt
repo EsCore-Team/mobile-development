@@ -9,13 +9,16 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
+class HistoryAdapter(private val onItemClicked: (String) -> Unit) : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
 
     private val items = mutableListOf<PredictionsItem>()
 
+    // Fungsi untuk menambahkan item ke adapter dan urutkan berdasarkan createdAt
     fun setItems(newItems: List<PredictionsItem>) {
         items.clear()
         items.addAll(newItems)
+        // Sortir data berdasarkan createdAt secara descending
+        items.sortByDescending { it.createdAt }
         notifyDataSetChanged()
     }
 
@@ -26,6 +29,11 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() 
             binding.cardTitle.text = item.title
             binding.cardDate.text = formatDate(item.createdAt)
             binding.cardScore.text = item.predictedResult?.score
+
+            // Set click listener
+            binding.root.setOnClickListener {
+                item.id?.let { id -> onItemClicked(id) }
+            }
         }
 
         private fun formatDate(dateString: String?): String {

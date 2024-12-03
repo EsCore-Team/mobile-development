@@ -41,7 +41,6 @@ class LoginActivity : AppCompatActivity() {
 
             if (isInputValid(email, password)) {
                 viewModel.login(email, password)
-//                navigateToMainActivity()
             }
         }
         playAnimation()
@@ -80,6 +79,7 @@ class LoginActivity : AppCompatActivity() {
                 }
                 is Result.Error -> {
                     showLoading(false)
+//                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
                     Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
                 }
             }

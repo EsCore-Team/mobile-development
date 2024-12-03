@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.dicoding.escore.data.remote.UserRepository
 import com.dicoding.escore.di.Injection
 import com.dicoding.escore.pref.SessionManager
+import com.dicoding.escore.view.bottombar.home.HomeViewModel
 import com.dicoding.escore.view.bottombar.profile.ProfileViewModel
+import com.dicoding.escore.view.detailHistory.DetailHistoryViewModel
 import com.dicoding.escore.view.history.HistoryViewModel
 import com.dicoding.escore.view.login.LoginViewModel
 import com.dicoding.escore.view.main.MainViewModel
@@ -71,6 +73,12 @@ class ViewModelFactory(
             }
             modelClass.isAssignableFrom(HistoryViewModel::class.java) -> {
                 HistoryViewModel(repository, sessionManager) as T
+            }
+            modelClass.isAssignableFrom(DetailHistoryViewModel::class.java) -> {
+                DetailHistoryViewModel(repository, sessionManager) as T
+            }
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(repository, sessionManager) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

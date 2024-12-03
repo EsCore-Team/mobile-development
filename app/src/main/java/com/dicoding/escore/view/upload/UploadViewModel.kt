@@ -8,6 +8,7 @@ import com.dicoding.escore.data.remote.MLRepository
 import com.dicoding.escore.data.remote.Result
 import com.dicoding.escore.data.remote.response.ModelMachineLearningResponse
 import kotlinx.coroutines.launch
+import java.io.File
 
 class UploadViewModel(private val repository: MLRepository): ViewModel()  {
     private val _isLoading = MutableLiveData<Boolean>()
