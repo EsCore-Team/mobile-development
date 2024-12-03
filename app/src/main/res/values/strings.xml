@@ -15,7 +15,7 @@
     <string name="logout">Logout</string>
     <string name="password_validation">Password must be more than 8 characters</string>
     <string name="email_validation">Invalid email format</string>
-
+    <string name="max_words">Your title exceeds the 10 words limit!</string>
     <string name="empty_name">Name cannot be empty</string>
     <string name="empty_email">Email cannot be empty</string>
     <string name="empty_password">Password cannot be empty</string>
@@ -137,4 +137,7 @@
     <string name="arrow_icon">Arrow Icon</string>
     <string name="profile_image">Profile Image</string>
     <string name="history_item_title">History Item Title</string>
+    <string name="desc_onboarding">EsCore is an AI-powered solution for objective and efficient essay scoring. Let’s make grading faster and fairer!</string>
+    <string name="welcome_to_escore">🎓 Welcome to EsCore!</string>
+    <string name="next_icon">Next Icon</string>
 </resources>

@@ -62,7 +62,7 @@ class UploadActivity : AppCompatActivity() {
                 viewModel.predict(userEmail, textTitle, textDesc)
             } else{
                 // Tampilkan pesan error jika email tidak ditemukan
-                Toast.makeText(this, "Please fill the essay", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please complete all required fields!", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -112,10 +112,18 @@ class UploadActivity : AppCompatActivity() {
 
     private fun isInputValid(title: String, description: String): Boolean {
         var isValid = true
+        val maxWords = 10
+
+        // Hitung jumlah kata dalam title
+        val wordCount = title.trim().split("\\s+".toRegex()).size
 
         // Validasi untuk title
         if (title.isEmpty()) {
             binding.titleTextBox.error = getString(R.string.empty_title)
+            binding.titleTextBox.setBackgroundResource(R.drawable.border_warning) // Terapkan border merah
+            isValid = false
+        } else if (wordCount > maxWords) {
+            binding.titleTextBox.error = getString(R.string.max_words)
             binding.titleTextBox.setBackgroundResource(R.drawable.border_warning) // Terapkan border merah
             isValid = false
         } else {

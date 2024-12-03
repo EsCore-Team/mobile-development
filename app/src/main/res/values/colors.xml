@@ -12,4 +12,5 @@
     <color name="text_toolbar">#7AB2D3</color>
     <color name="green">#02C41F</color>
     <color name="upload_button">#6C9BB6</color>
+    <color name="gray_dark">#808080</color>
 </resources>

@@ -44,28 +44,20 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     private fun setupAction() {
-        binding.loginButton.setOnClickListener {
+        binding.startButton.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
 
-        binding.signupButton.setOnClickListener {
-            startActivity(Intent(this, SignUpActivity::class.java))
-        }
     }
 
     private fun playAnimation() {
 
-        val login = ObjectAnimator.ofFloat(binding.loginButton, View.ALPHA, 1f).setDuration(200)
-        val signup = ObjectAnimator.ofFloat(binding.signupButton, View.ALPHA, 1f).setDuration(200)
+        val next = ObjectAnimator.ofFloat(binding.startButton, View.ALPHA, 1f).setDuration(200)
         val title = ObjectAnimator.ofFloat(binding.titleTextView, View.ALPHA, 1f).setDuration(200)
         val desc = ObjectAnimator.ofFloat(binding.descTextView, View.ALPHA, 1f).setDuration(200)
 
-        val together = AnimatorSet().apply {
-            playTogether(login, signup)
-        }
-
         AnimatorSet().apply {
-            playSequentially(title, desc, together)
+            playSequentially(title, desc, next)
             start()
         }
     }

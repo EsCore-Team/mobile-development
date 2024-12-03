@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.escore.R
 import com.dicoding.escore.adapter.HistoryAdapter
+import com.dicoding.escore.data.remote.Result
 import com.dicoding.escore.databinding.FragmentHomeBinding
 import com.dicoding.escore.view.ViewModelFactory
 import com.dicoding.escore.view.detailHistory.DetailHistoryActivity
@@ -73,11 +74,11 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val historyViewModel: HistoryViewModel by viewModels {
+    private val viewModel: HomeViewModel by viewModels {
         ViewModelFactory.getInstance(requireContext())
     }
 
-    private lateinit var historyAdapter: HistoryAdapter
+    private lateinit var adapter: HistoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -90,7 +91,9 @@ class HomeFragment : Fragment() {
         setupRecyclerView()
 
         // Observasi data history
-        observeHistory()
+        observeViewModel()
+
+        viewModel.fetchHistory(createdAt = "", title = "", score = "")
 
         binding.submitButton.setOnClickListener {
             val intent = Intent(requireContext(), UploadActivity::class.java)
@@ -106,36 +109,48 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        historyAdapter = HistoryAdapter { id ->
+        adapter = HistoryAdapter { id ->
             val intent = Intent(requireContext(), DetailHistoryActivity::class.java)
             intent.putExtra("EXTRA_ID", id)
             startActivity(intent)
         }
         binding.rvHistory.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = historyAdapter
+            adapter = this@HomeFragment.adapter
         }
     }
 
-    private fun observeHistory() {
-        historyViewModel.historyLiveData.observe(viewLifecycleOwner) { response ->
-            response?.predictions?.let { predictions ->
-                // Membalik urutan data berdasarkan createdAt
-                val sortedList = predictions.filterNotNull()
-                    .sortedByDescending { it.createdAt }
-                    .take(3) // Membatasi hanya 3 item
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
 
-                // Mengatur data ke adapter
-                historyAdapter.setItems(sortedList)
+    }
+
+    private fun observeViewModel() {
+        viewModel.isLoading.observe(this) { isLoading ->
+            showLoading(isLoading)
+        }
+
+        viewModel.historyLiveData.observe(this) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    showLoading(true)
+                }
+                is Result.Success -> {
+                    showLoading(false)
+                    val predictions = result.data.predictions
+                        ?.filterNotNull()
+                        ?.sortedByDescending { it.createdAt }
+                        ?.take(3)
+                    predictions?.let { sortedList ->
+                        adapter.setItems(sortedList)
+                    }
+                }
+                is Result.Error -> {
+                    showLoading(false)
+                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
+                }
             }
         }
-
-        historyViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
-            Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
-        }
-
-        // Fetch data
-        historyViewModel.fetchHistory(createdAt = "", title = "", score = "")
     }
 
 

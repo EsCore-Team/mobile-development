@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -20,12 +21,14 @@ import com.dicoding.escore.data.remote.UserRepository
 import com.dicoding.escore.data.remote.response.HistoryResponse
 import com.dicoding.escore.data.remote.retrofit.ApiService
 import com.dicoding.escore.databinding.ActivityHistoryBinding
+import com.dicoding.escore.databinding.ActivityLoginBinding
 import com.dicoding.escore.databinding.ActivityResultUploadBinding
 import com.dicoding.escore.pref.SessionManager
 import com.dicoding.escore.view.ViewModelFactory
 import com.dicoding.escore.view.detailHistory.DetailHistoryActivity
 import com.dicoding.escore.view.login.LoginViewModel
 import com.dicoding.escore.view.signup.SignUpActivity
+import com.dicoding.escore.data.remote.Result
 
 //class HistoryActivity : AppCompatActivity() {
 //    private val viewModel by viewModels<HistoryViewModel> {
@@ -66,10 +69,12 @@ class HistoryActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
     private lateinit var adapter: HistoryAdapter
+    private lateinit var binding: ActivityHistoryBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_history)
+        binding = ActivityHistoryBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         adapter = HistoryAdapter { id ->
             val intent = Intent(this, DetailHistoryActivity::class.java)
@@ -88,20 +93,53 @@ class HistoryActivity : AppCompatActivity() {
 
     }
 
+//    private fun observeViewModel() {
+//        viewModel.historyLiveData.observe(this) { response ->
+//            response?.predictions?.let { predictions ->
+//                // Membalikkan urutan data berdasarkan createdAt
+//                val sortedList = predictions.filterNotNull().sortedByDescending {
+//                    it.createdAt
+//                }
+//                adapter.setItems(sortedList)
+//            }
+//        }
+//
+//        viewModel.errorLiveData.observe(this) { error ->
+//            Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+//        }
+//    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+
+    }
+
     private fun observeViewModel() {
-        viewModel.historyLiveData.observe(this) { response ->
-            response?.predictions?.let { predictions ->
-                // Membalikkan urutan data berdasarkan createdAt
-                val sortedList = predictions.filterNotNull().sortedByDescending {
-                    it.createdAt
-                }
-                adapter.setItems(sortedList)
-            }
+        viewModel.isLoading.observe(this) { isLoading ->
+            showLoading(isLoading)
         }
 
-        viewModel.errorLiveData.observe(this) { error ->
-            Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+        viewModel.historyLiveData.observe(this) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    showLoading(true)
+                }
+                is Result.Success -> {
+                    showLoading(false)
+                    val predictions = result.data.predictions?.filterNotNull()?.sortedByDescending {
+                        it.createdAt
+                    }
+                    predictions?.let { sortedList ->
+                        adapter.setItems(sortedList)
+                    }
+                }
+                is Result.Error -> {
+                    showLoading(false)
+                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
+
 
 }
