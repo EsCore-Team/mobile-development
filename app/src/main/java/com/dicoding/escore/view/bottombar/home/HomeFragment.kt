@@ -126,11 +126,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.isLoading.observe(this) { isLoading ->
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             showLoading(isLoading)
         }
 
-        viewModel.historyLiveData.observe(this) { result ->
+        viewModel.historyLiveData.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
                     showLoading(true)
@@ -140,7 +140,7 @@ class HomeFragment : Fragment() {
                     val predictions = result.data.predictions
                         ?.filterNotNull()
                         ?.sortedByDescending { it.createdAt }
-                        ?.take(3)
+                        ?.take(2)
                     predictions?.let { sortedList ->
                         adapter.setItems(sortedList)
                     }
