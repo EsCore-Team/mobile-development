@@ -62,16 +62,21 @@
         <TextView
             android:id="@+id/card_score"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:layout_marginStart="8dp"
             android:gravity="center"
+            android:layout_gravity="center_vertical"
             android:textSize="20sp"
             android:paddingHorizontal="15dp"
             android:textAppearance="?attr/textAppearanceHeadlineMedium"
             android:textColor="@color/white"
             android:background="@drawable/rounded_edittext"
-            android:backgroundTint="@color/green"
-            tools:text="5/6" />
+            android:backgroundTint="@color/button"
+            tools:text="5/6"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
 
         <!-- Arrow ImageView -->
         <ImageView
