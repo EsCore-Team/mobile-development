@@ -14,7 +14,9 @@ import com.dicoding.escore.R
 import com.dicoding.escore.databinding.ActivityResultUploadBinding
 import com.dicoding.escore.databinding.ActivityUploadBinding
 import com.dicoding.escore.pref.SessionManager
+import com.dicoding.escore.view.bottombar.guide.GuideFragment
 import com.dicoding.escore.view.main.MainActivity
+import com.dicoding.escore.view.signup.SignUpActivity
 import com.dicoding.escore.view.upload.UploadActivity
 
 class ResultUploadActivity : AppCompatActivity() {

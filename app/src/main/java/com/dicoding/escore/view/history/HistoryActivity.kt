@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
@@ -30,40 +31,6 @@ import com.dicoding.escore.view.login.LoginViewModel
 import com.dicoding.escore.view.signup.SignUpActivity
 import com.dicoding.escore.data.remote.Result
 
-//class HistoryActivity : AppCompatActivity() {
-//    private val viewModel by viewModels<HistoryViewModel> {
-//        ViewModelFactory.getInstance(this)
-//    }
-//    private lateinit var adapter: HistoryAdapter
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_history)
-//
-//        adapter = HistoryAdapter()
-//        val recyclerView: RecyclerView = findViewById(R.id.rv_history)
-//        recyclerView.layoutManager = LinearLayoutManager(this)
-//        recyclerView.adapter = adapter
-//
-//        observeViewModel()
-//
-//        // Fetch history
-//        viewModel.fetchHistory(createdAt = "", title = "", score = "")
-//    }
-//
-//    private fun observeViewModel() {
-//        viewModel.historyLiveData.observe(this) { response ->
-//            response?.predictions?.let { predictions ->
-//                adapter.setItems(predictions.filterNotNull())
-//            }
-//        }
-//
-//        viewModel.errorLiveData.observe(this) { error ->
-//            Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
-//        }
-//    }
-//}
-
 class HistoryActivity : AppCompatActivity() {
     private val viewModel by viewModels<HistoryViewModel> {
         ViewModelFactory.getInstance(this)
@@ -80,6 +47,18 @@ class HistoryActivity : AppCompatActivity() {
             val intent = Intent(this, DetailHistoryActivity::class.java)
             intent.putExtra("EXTRA_ID", id)
             startActivity(intent)
+        }
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar) // Set Toolbar as the ActionBar
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        binding.toolbar.navigationIcon?.setTint(getColor(R.color.black))
+
+
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressed() // Aksi tombol back
         }
 
         val recyclerView: RecyclerView = findViewById(R.id.rv_history)

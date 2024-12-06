@@ -13,4 +13,5 @@
     <color name="green">#02C41F</color>
     <color name="upload_button">#6C9BB6</color>
     <color name="gray_dark">#808080</color>
+    <color name="bottom_bar">#EBEBEB</color>
 </resources>

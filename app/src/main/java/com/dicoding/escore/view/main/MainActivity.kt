@@ -1,10 +1,14 @@
 package com.dicoding.escore.view.main
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -76,6 +80,78 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 //    }
 //}
 
+//class MainActivity : AppCompatActivity() {
+//    private val viewModel by viewModels<MainViewModel> {
+//        ViewModelFactory.getInstance(this)
+//    }
+//
+//    private lateinit var binding: ActivityMainBinding
+//    private lateinit var sessionManager: SessionManager
+//    private lateinit var toolbarTitle: TextView
+//
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        binding = ActivityMainBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
+//
+//        sessionManager = SessionManager(this)
+//        checkSession()
+//
+////        // Atur Toolbar
+////        val toolbar: Toolbar = findViewById(R.id.toolbar)
+////        setSupportActionBar(toolbar)
+////        supportActionBar?.setDisplayShowTitleEnabled(false) // Hapus judul bawaan
+////
+////        // Tambahkan TextView untuk judul di tengah
+////        toolbarTitle = TextView(this).apply {
+////            textSize = 18f
+////            setTextColor(Color.parseColor("#7AB2D3"))
+////            typeface = Typeface.DEFAULT_BOLD
+////            gravity = Gravity.CENTER
+////        }
+////
+////        val layoutParams = Toolbar.LayoutParams(
+////            Toolbar.LayoutParams.WRAP_CONTENT,
+////            Toolbar.LayoutParams.WRAP_CONTENT
+////        ).apply {
+////            gravity = Gravity.CENTER
+////        }
+////        toolbar.addView(toolbarTitle, layoutParams)
+//
+//        // Bottom Navigation dan NavController
+//        val navView: BottomNavigationView = binding.navView
+//        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+//
+//        // Konfigurasikan AppBar
+//        val appBarConfiguration = AppBarConfiguration(
+//            setOf(
+//                R.id.navigation_guide, R.id.navigation_home, R.id.navigation_profile
+//            )
+//        )
+//        setupActionBarWithNavController(navController, appBarConfiguration)
+//        navView.setupWithNavController(navController)
+//
+////        // Perbarui judul toolbar berdasarkan navigasi
+////        navController.addOnDestinationChangedListener { _, destination, _ ->
+////            toolbarTitle.text = destination.label
+////        }
+//    }
+//
+//    private fun checkSession() {
+//        val token = sessionManager.getAuthToken()
+//        if (token == null) {
+//            // Jika token tidak ada, navigasi ke layar login
+//            navigateToLogin()
+//        }
+//    }
+//
+//    private fun navigateToLogin() {
+//        val intent = Intent(this, OnboardingActivity::class.java)
+//        startActivity(intent)
+//        finish()
+//    }
+//}
+
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<MainViewModel> {
         ViewModelFactory.getInstance(this)
@@ -83,7 +159,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var sessionManager: SessionManager
-    private lateinit var toolbarTitle: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,44 +168,35 @@ class MainActivity : AppCompatActivity() {
         sessionManager = SessionManager(this)
         checkSession()
 
-        // Atur Toolbar
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false) // Hapus judul bawaan
-
-        // Tambahkan TextView untuk judul di tengah
-        toolbarTitle = TextView(this).apply {
-            textSize = 18f
-            setTextColor(Color.parseColor("#7AB2D3"))
-            typeface = Typeface.DEFAULT_BOLD
-            gravity = Gravity.CENTER
-        }
-
-        val layoutParams = Toolbar.LayoutParams(
-            Toolbar.LayoutParams.WRAP_CONTENT,
-            Toolbar.LayoutParams.WRAP_CONTENT
-        ).apply {
-            gravity = Gravity.CENTER
-        }
-        toolbar.addView(toolbarTitle, layoutParams)
-
         // Bottom Navigation dan NavController
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
-        // Konfigurasikan AppBar
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_guide, R.id.navigation_home, R.id.navigation_profile
+        navView.setupWithNavController(navController)
+        // Atur warna ikon aktif dan tidak aktif
+        setupBottomNavigationView(navView)
+
+    }
+
+    private fun setupBottomNavigationView(navView: BottomNavigationView) {
+        // Warna aktif dan tidak aktif
+        val colorStateList = ColorStateList(
+            arrayOf(
+                intArrayOf(android.R.attr.state_checked),  // State aktif
+                intArrayOf(-android.R.attr.state_checked) // State tidak aktif
+            ),
+            intArrayOf(
+                ContextCompat.getColor(this, R.color.white),  // Warna aktif
+                ContextCompat.getColor(this, R.color.colorPrimary) // Warna tidak aktif
             )
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
 
-        // Perbarui judul toolbar berdasarkan navigasi
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            toolbarTitle.text = destination.label
-        }
+        // Terapkan warna ke ikon dan teks
+        navView.itemIconTintList = colorStateList
+        navView.itemTextColor = colorStateList
+
+//        // Atur warna latar belakang
+//        navView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary))
     }
 
     private fun checkSession() {

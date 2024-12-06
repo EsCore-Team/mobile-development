@@ -21,6 +21,11 @@ class HomeViewModel(
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _fullName = MutableLiveData<String>().apply {
+        value = sessionManager.getUserFullName() ?: "Nama lengkap tidak tersedia"
+    }
+    val fullName: LiveData<String> = _fullName
+
     fun fetchHistory(createdAt: String, title: String, score: String) {
         viewModelScope.launch {
             _historyLiveData.postValue(Result.Loading) // Indikasikan loading
