@@ -200,6 +200,17 @@
                 android:textSize="14sp"
                 android:textIsSelectable="true"/>
 
+            <TextView
+                android:id="@+id/guide_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="end"
+                android:text="Please refer to the guide!"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:textStyle="italic" />
+
             <Button
                 android:id="@+id/btn_return_home"
                 android:layout_width="match_parent"
@@ -208,6 +219,7 @@
                 android:backgroundTint="@color/colorPrimary"
                 android:text="@string/back_to_home"
                 android:textColor="@android:color/white" />
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

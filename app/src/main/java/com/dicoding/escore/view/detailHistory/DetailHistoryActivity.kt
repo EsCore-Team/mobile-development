@@ -1,5 +1,6 @@
 package com.dicoding.escore.view.detailHistory
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.TextView
@@ -13,6 +14,8 @@ import androidx.core.view.WindowInsetsCompat
 import com.dicoding.escore.R
 import com.dicoding.escore.databinding.ActivityDetailHistoryBinding
 import com.dicoding.escore.view.ViewModelFactory
+import com.dicoding.escore.view.bottombar.guide.GuideFragment
+import com.dicoding.escore.view.main.MainActivity
 
 
 class DetailHistoryActivity : AppCompatActivity() {
