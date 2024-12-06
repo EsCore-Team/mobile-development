@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.dicoding.escore"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"

@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.dicoding.escore.R
@@ -42,6 +43,18 @@ class DetailHistoryActivity : AppCompatActivity() {
             Toast.makeText(this, "Email not found.", Toast.LENGTH_SHORT).show()
             finish()
             return
+        }
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar) // Set Toolbar as the ActionBar
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        binding.toolbar.navigationIcon?.setTint(getColor(R.color.black))
+
+
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressed() // Aksi tombol back
         }
 
         observeViewModel()

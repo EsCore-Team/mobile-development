@@ -32,7 +32,7 @@ class UploadActivity : AppCompatActivity() {
     private val viewModel by viewModels<UploadViewModel> {
         ViewModelFactoryML.getInstance(this)
     }
-    @RequiresApi(Build.VERSION_CODES.M)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUploadBinding.inflate(layoutInflater)
