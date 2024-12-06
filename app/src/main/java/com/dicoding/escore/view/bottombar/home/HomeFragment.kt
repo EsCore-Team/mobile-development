@@ -85,11 +85,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.isLoading.observe(this) { isLoading ->
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             showLoading(isLoading)
         }
 
-        viewModel.historyLiveData.observe(this) { result ->
+        viewModel.historyLiveData.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> showLoading(true)
                 is Result.Success -> {
@@ -97,7 +97,11 @@ class HomeFragment : Fragment() {
                     val predictions = result.data.predictions?.filterNotNull()?.sortedByDescending {
                         it.createdAt
                     }
-                    predictions?.let { sortedList ->
+
+                    // Batasi hanya 2 item pertama
+                    val limitedPredictions = predictions?.take(3)
+
+                    limitedPredictions?.let { sortedList ->
                         adapter.setItems(sortedList)
                         binding.rvHistory.visibility = if (sortedList.isNotEmpty()) View.VISIBLE else View.GONE
                     }
@@ -120,10 +124,11 @@ class HomeFragment : Fragment() {
             }
         }
 
-        viewModel.noDataVisible.observe(this) { isVisible ->
+        viewModel.noDataVisible.observe(viewLifecycleOwner) { isVisible ->
             binding.tvNoData.visibility = if (isVisible) View.VISIBLE else View.GONE
         }
     }
+
 
 
     override fun onDestroyView() {

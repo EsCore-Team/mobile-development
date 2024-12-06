@@ -146,5 +146,6 @@
     <string name="view_all">View All</string>
 
     <string name="connection_error">Error connection</string>
+    <string name="password_email_not_found">Email and password not found</string>
 
 </resources>
