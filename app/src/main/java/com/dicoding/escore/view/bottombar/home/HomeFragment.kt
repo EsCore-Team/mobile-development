@@ -100,6 +100,10 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        viewModel.fullName.observe(viewLifecycleOwner) { fullName ->
+            binding.textName.text = fullName
+        }
+
         binding.tvViewAll.setOnClickListener {
             val intent = Intent(requireContext(), HistoryActivity::class.java)
             startActivity(intent)
