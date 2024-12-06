@@ -53,13 +53,47 @@ class LoginActivity : AppCompatActivity() {
         observeViewModel()
     }
 
+//    private fun observeViewModel() {
+//        viewModel.isLoading.observe(this) { isLoading ->
+//            showLoading(isLoading)
+//        }
+//
+//        viewModel.loginResult.observe(this) { result ->
+//            when(result) {
+//                is Result.Loading -> {
+//                    showLoading(true)
+//                }
+//                is Result.Success -> {
+//                    showLoading(false)
+//                    val token = result.data.loginResult.token
+//                    val email = result.data.loginResult.email ?: "Email tidak tersedia"
+//                    val fullName = result.data.loginResult.fullName ?: "Nama tidak tersedia"
+//                    lifecycleScope.launch {
+//                        sessionManager.saveAuthToken(token)
+//                        sessionManager.saveUserEmail(email)
+//                        sessionManager.saveUserFullName(fullName)
+//                    }
+//                    Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
+//
+//                    navigateToMainActivity()
+//                }
+//                is Result.Error -> {
+//                    showLoading(false)
+////                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        }
+//    }
+
+
     private fun observeViewModel() {
         viewModel.isLoading.observe(this) { isLoading ->
             showLoading(isLoading)
         }
 
         viewModel.loginResult.observe(this) { result ->
-            when(result) {
+            when (result) {
                 is Result.Loading -> {
                     showLoading(true)
                 }
@@ -74,17 +108,25 @@ class LoginActivity : AppCompatActivity() {
                         sessionManager.saveUserFullName(fullName)
                     }
                     Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
-
                     navigateToMainActivity()
                 }
                 is Result.Error -> {
                     showLoading(false)
-//                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
-                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                    val errorMessage = result.error ?: "Unknown error"
+                    if (errorMessage.contains("Connection error", true) || errorMessage.contains("unable to resolve host", true)) {
+                        // Tampilkan toast jika ada masalah koneksi atau masalah host
+                        Toast.makeText(this, getString(R.string.connection_error), Toast.LENGTH_SHORT).show()
+                    } else {
+                        // Tampilkan error lainnya
+                        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
     }
+
+
+
 
     private fun navigateToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
@@ -118,11 +160,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun playAnimation() {
-//        ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
-//            duration = 6000
-//            repeatCount = ObjectAnimator.INFINITE
-//            repeatMode = ObjectAnimator.REVERSE
-//        }.start()
 
         val title = ObjectAnimator.ofFloat(binding.titleTextView, View.ALPHA, 1f).setDuration(200)
         val emailTextView = ObjectAnimator.ofFloat(binding.emailTextView, View.ALPHA, 1f).setDuration(200)

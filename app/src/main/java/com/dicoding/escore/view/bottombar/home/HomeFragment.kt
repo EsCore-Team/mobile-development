@@ -24,51 +24,6 @@ import com.dicoding.escore.view.onboarding.OnboardingActivity
 import com.dicoding.escore.view.signup.SignUpActivity
 import com.dicoding.escore.view.upload.UploadActivity
 
-//class HomeFragment : Fragment() {
-//
-//    private var _binding: FragmentHomeBinding? = null
-//
-//    // This property is only valid between onCreateView and
-//    // onDestroyView.
-//    private val binding get() = _binding!!
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View {
-//        val homeViewModel =
-//            ViewModelProvider(this).get(HomeViewModel::class.java)
-//
-//        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-//        val root: View = binding.root
-//
-//        binding.submitButton.setOnClickListener {
-//            val intent = Intent(requireContext(), UploadActivity::class.java)
-//            startActivity(intent)
-//            requireActivity()
-//        }
-//
-//        binding.tvViewAll.setOnClickListener {
-//            val intent = Intent(requireContext(), HistoryActivity::class.java)
-//            startActivity(intent)
-//            requireActivity()
-//        }
-//
-//
-//        val textView: TextView = binding.textHome
-//        homeViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
-//        return root
-//    }
-//
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        _binding = null
-//    }
-//}
-
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
@@ -130,30 +85,43 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+        viewModel.isLoading.observe(this) { isLoading ->
             showLoading(isLoading)
         }
 
-        viewModel.historyLiveData.observe(viewLifecycleOwner) { result ->
+        viewModel.historyLiveData.observe(this) { result ->
             when (result) {
-                is Result.Loading -> {
-                    showLoading(true)
-                }
+                is Result.Loading -> showLoading(true)
                 is Result.Success -> {
                     showLoading(false)
-                    val predictions = result.data.predictions
-                        ?.filterNotNull()
-                        ?.sortedByDescending { it.createdAt }
-                        ?.take(2)
+                    val predictions = result.data.predictions?.filterNotNull()?.sortedByDescending {
+                        it.createdAt
+                    }
                     predictions?.let { sortedList ->
                         adapter.setItems(sortedList)
+                        binding.rvHistory.visibility = if (sortedList.isNotEmpty()) View.VISIBLE else View.GONE
                     }
                 }
                 is Result.Error -> {
                     showLoading(false)
-                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
+                    when (result.error) {
+                        "No Data" -> {
+                            binding.rvHistory.visibility = View.GONE
+                            binding.tvNoData.visibility = View.VISIBLE
+                        }
+                        "Error connection" -> {
+                            Toast.makeText(requireContext(), "Error connection", Toast.LENGTH_SHORT).show()
+                        }
+                        else -> {
+                            Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
             }
+        }
+
+        viewModel.noDataVisible.observe(this) { isVisible ->
+            binding.tvNoData.visibility = if (isVisible) View.VISIBLE else View.GONE
         }
     }
 

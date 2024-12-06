@@ -144,4 +144,7 @@
     <string name="onboarding_image">Onboarding Image</string>
     <string name="get_started">Get Started</string>
     <string name="view_all">View All</string>
+
+    <string name="connection_error">Error connection</string>
+
 </resources>

@@ -9,6 +9,9 @@ import com.dicoding.escore.data.remote.UserRepository
 import com.dicoding.escore.data.remote.response.HistoryResponse
 import com.dicoding.escore.pref.SessionManager
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.io.IOException
+import java.net.UnknownHostException
 
 class HomeViewModel(
     private val repository: UserRepository,
@@ -26,21 +29,71 @@ class HomeViewModel(
     }
     val fullName: LiveData<String> = _fullName
 
+    // MutableLiveData untuk mengontrol visibilitas "No Data History"
+    private val _noDataVisible = MutableLiveData<Boolean>()
+    val noDataVisible: LiveData<Boolean> = _noDataVisible
+
     fun fetchHistory(createdAt: String, title: String, score: String) {
         viewModelScope.launch {
-            _historyLiveData.postValue(Result.Loading) // Indikasikan loading
+            _historyLiveData.postValue(Result.Loading)
+            _isLoading.postValue(true)
+
             try {
                 val email = sessionManager.getUserEmail()
                 if (email.isNullOrEmpty()) {
                     _historyLiveData.postValue(Result.Error("Email not found in session."))
+                    _isLoading.postValue(false)
+                    _noDataVisible.postValue(true)
                     return@launch
                 }
+
                 val response = repository.getHistory(email, createdAt, title, score)
-                _historyLiveData.postValue(Result.Success(response))
+
+                if (response.predictions.isNullOrEmpty()) {
+                    _historyLiveData.postValue(Result.Error("No Data")) // No data case
+                    _noDataVisible.postValue(true)
+                } else {
+                    _historyLiveData.postValue(Result.Success(response))
+                    _noDataVisible.postValue(false)
+                }
+            } catch (e: UnknownHostException) {
+                // Masalah koneksi internet
+                _historyLiveData.postValue(Result.Error("Error connection"))
+            } catch (e: HttpException) {
+                if (e.code() == 404) {
+                    _historyLiveData.postValue(Result.Error("No Data")) // Tangani 404 sebagai No Data
+                    _noDataVisible.postValue(true)
+                } else {
+                    _historyLiveData.postValue(Result.Error(e.message ?: "An error occurred."))
+                    _noDataVisible.postValue(true)
+                }
+            } catch (e: IOException) {
+                // Kesalahan jaringan lainnya
+                _historyLiveData.postValue(Result.Error("Error connection"))
             } catch (e: Exception) {
                 _historyLiveData.postValue(Result.Error(e.message ?: "An error occurred."))
+                _noDataVisible.postValue(true)
+            } finally {
+                _isLoading.postValue(false)
             }
         }
     }
+
+//    fun fetchHistory(createdAt: String, title: String, score: String) {
+//        viewModelScope.launch {
+//            _historyLiveData.postValue(Result.Loading) // Indikasikan loading
+//            try {
+//                val email = sessionManager.getUserEmail()
+//                if (email.isNullOrEmpty()) {
+//                    _historyLiveData.postValue(Result.Error("Email not found in session."))
+//                    return@launch
+//                }
+//                val response = repository.getHistory(email, createdAt, title, score)
+//                _historyLiveData.postValue(Result.Success(response))
+//            } catch (e: Exception) {
+//                _historyLiveData.postValue(Result.Error(e.message ?: "An error occurred."))
+//            }
+//        }
+//    }
 }
 
