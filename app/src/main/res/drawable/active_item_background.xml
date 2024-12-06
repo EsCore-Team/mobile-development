@@ -1,0 +1,13 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Item aktif dengan background oval berwarna pink -->
+    <item android:state_checked="true">
+        <inset
+            android:drawable="@drawable/oval_background_active"
+            android:insetLeft="10dp"
+            android:insetTop="6dp"
+            android:insetRight="10dp"
+            android:insetBottom="2dp" />
+    </item>
+    <!-- Item tidak aktif, transparan -->
+    <item android:drawable="@android:color/transparent"/>
+</selector>

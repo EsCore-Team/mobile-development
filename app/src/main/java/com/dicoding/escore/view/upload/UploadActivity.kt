@@ -3,6 +3,7 @@ package com.dicoding.escore.view.upload
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
@@ -10,6 +11,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -30,6 +32,7 @@ class UploadActivity : AppCompatActivity() {
     private val viewModel by viewModels<UploadViewModel> {
         ViewModelFactoryML.getInstance(this)
     }
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUploadBinding.inflate(layoutInflater)
@@ -43,6 +46,14 @@ class UploadActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar) // Set Toolbar as the ActionBar
         supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        binding.toolbar.navigationIcon?.setTint(getColor(R.color.black))
+
+
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressed() // Aksi tombol back
+        }
 
         binding.submitButton.setOnClickListener {
 
