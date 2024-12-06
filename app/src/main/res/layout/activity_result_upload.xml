@@ -203,7 +203,7 @@
             <Button
                 android:id="@+id/btn_return_home"
                 android:layout_width="match_parent"
-                android:layout_height="47dp"
+                android:layout_height="57dp"
                 android:layout_marginTop="32dp"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="@string/back_to_home"

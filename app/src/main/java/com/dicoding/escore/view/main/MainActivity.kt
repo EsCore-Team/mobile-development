@@ -1,6 +1,7 @@
 package com.dicoding.escore.view.main
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -168,15 +169,10 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
-        // Konfigurasikan AppBar
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_guide, R.id.navigation_home, R.id.navigation_profile
-            )
-        )
         navView.setupWithNavController(navController)
 
     }
+
 
     private fun checkSession() {
         val token = sessionManager.getAuthToken()
