@@ -100,6 +100,14 @@
     <string name="this_is_essay">This is essay!</string>
     <string name="result">Result</string>
 
+
+
+
+    <string name="english_warning">
+        <b>Essays must be written exclusively in English,</b>
+         adhering to proper grammar, vocabulary, and sentence structure to ensure clarity and coherence. This requirement ensures uniformity in evaluation and allows for a fair assessment of language proficiency, critical thinking, and the ability to effectively use evidence from the source text(s) to support the essay arguments.
+    </string>
+
     <string name="holistic_rating_content">
     After reading each essay and completing the analytical rating form, assign a holistic score based on the rubric below. For the following evaluations, you will need to use a grading scale between 1 (minimum) and 6 (maximum). As with the analytical rating form, the distance between each grade (e.g., 1-2, 3-4, 4-5) should be considered equal.
     </string>
