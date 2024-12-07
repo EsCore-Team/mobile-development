@@ -51,7 +51,6 @@
             android:exported="true"/>
         <activity
             android:name=".view.splashScreen.SplashScreenActivity"
-            android:theme="@style/noActionBar"
             android:configChanges="uiMode|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait">

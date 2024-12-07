@@ -30,7 +30,7 @@
         android:text="Hi, Welcome!"
         android:textAlignment="center"
         android:textColor="@color/gray"
-        android:textSize="15sp"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
         android:text="Bagas Rizaldi"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.104"
@@ -78,16 +78,18 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <!-- ImageView -->
+
+            <!-- Title -->
+
             <ImageView
                 android:id="@+id/icon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="8dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="4dp"
                 android:src="@drawable/icon_essay"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!-- Title -->
             <TextView
                 android:id="@+id/title"
                 android:layout_width="0dp"
@@ -96,7 +98,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="Upload essays"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="21sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/icon"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -122,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:backgroundTint="@color/navy"
+                android:backgroundTint="@color/navy_text"
                 android:text="Upload"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -142,9 +144,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
             android:text="@string/history"
+            android:textColor="@color/black"
             android:textSize="21sp"
-            android:textStyle="bold"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/uploadEssaysSection" />
 
@@ -167,7 +171,6 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="8dp"
-            android:elevation="2dp"
             android:background="@color/gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
