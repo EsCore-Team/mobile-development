@@ -136,6 +136,7 @@
         android:alpha="0"
         android:backgroundTint="@color/button"
         android:text="@string/login"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
