@@ -78,7 +78,7 @@
                 android:hint="Title"
                 android:gravity="top"
                 android:padding="12dp"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textIsSelectable="true"/>
 
@@ -196,7 +196,7 @@
                 android:gravity="top"
                 android:hint="@string/this_is_essay"
                 android:padding="12dp"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textIsSelectable="true"/>
 

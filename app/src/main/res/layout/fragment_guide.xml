@@ -78,10 +78,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/guide_title"
-                        android:textSize="18sp"
+                        android:textSize="20sp"
+                        android:gravity="center"
                         android:textStyle="bold"
                         android:textColor="@android:color/black"
-                        android:paddingBottom="12dp" />
+                        android:paddingBottom="20dp" />
+
+                    <TextView
+                        android:id="@+id/tv_english_warning"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/black"
+                        android:lineSpacingExtra="6dp"
+                        android:textIsSelectable="true"
+                        android:text="@string/english_warning"
+                        android:paddingBottom="12dp"/>
 
                     <TextView
                         android:id="@+id/tv_content"

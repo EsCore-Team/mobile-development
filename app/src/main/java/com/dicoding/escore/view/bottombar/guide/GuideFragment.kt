@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.escore.R
 import com.dicoding.escore.databinding.FragmentGuideBinding
@@ -26,6 +27,13 @@ class GuideFragment : Fragment() {
     ): View {
         val homeViewModel =
             ViewModelProvider(this).get(GuideViewModel::class.java)
+
+        requireActivity().window.apply {
+            statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
+
+            // Gunakan fallback untuk versi di bawah Android R
+            decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
 
         _binding = FragmentGuideBinding.inflate(inflater, container, false)
         val root: View = binding.root

@@ -49,29 +49,67 @@ class SignUpActivity : AppCompatActivity() {
         observeViewModel()
     }
 
+//    private fun observeViewModel() {
+//        viewModel.isLoading.observe(this) { isLoading ->
+//            showLoading(isLoading)
+//        }
+//        viewModel.registerResult.observe(this) { result ->
+//            when(result) {
+//                is Result.Loading -> {
+//                    showLoading(true)
+//                }
+//                is Result.Success -> {
+//                    showLoading(false)
+//                    Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
+//                    val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
+//                    startActivity(intent)
+//                    finish()
+//                }
+//                is Result.Error -> {
+//                    showLoading(false)
+//                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        }
+//    }
+
     private fun observeViewModel() {
         viewModel.isLoading.observe(this) { isLoading ->
             showLoading(isLoading)
         }
+
         viewModel.registerResult.observe(this) { result ->
-            when(result) {
+            when (result) {
                 is Result.Loading -> {
                     showLoading(true)
                 }
                 is Result.Success -> {
                     showLoading(false)
+                    // Menampilkan pesan sukses registrasi
                     Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
+
+                    // Arahkan ke LoginActivity setelah registrasi berhasil
                     val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
                     startActivity(intent)
                     finish()
                 }
                 is Result.Error -> {
                     showLoading(false)
-                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+
+                    // Mengecek jika error berhubungan dengan koneksi
+                    val errorMessage = result.error ?: "Unknown error"
+                    if (errorMessage.contains("Connection error", true) || errorMessage.contains("unable to resolve host", true)) {
+                        // Tampilkan toast jika masalah koneksi
+                        Toast.makeText(this, getString(R.string.connection_error), Toast.LENGTH_SHORT).show()
+                    } else {
+                        // Tampilkan pesan error lainnya
+                        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
     }
+
 
     private fun isInputValid(fullName: String, email: String, password: String): Boolean {
         var isValid = true

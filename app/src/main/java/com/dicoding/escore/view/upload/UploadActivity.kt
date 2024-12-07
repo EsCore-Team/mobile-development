@@ -115,7 +115,15 @@ class UploadActivity : AppCompatActivity() {
                 }
                 is Result.Error -> {
                     showLoading(false)
-                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                    val errorMessage = result.error ?: "Unknown error"
+
+                    if (errorMessage.contains("Error connection", true)) {
+                        // Tampilkan pesan error jika ada masalah koneksi
+                        Toast.makeText(this, getString(R.string.connection_error), Toast.LENGTH_SHORT).show()
+                    } else {
+                        // Tampilkan pesan error lainnya
+                        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }

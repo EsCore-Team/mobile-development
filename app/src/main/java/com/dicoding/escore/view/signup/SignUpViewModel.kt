@@ -19,9 +19,14 @@ class SignUpViewModel(private val repository: UserRepository): ViewModel() {
     fun register(fullName: String, email: String, password: String) {
         _isLoading.value = true
         viewModelScope.launch {
-            val result = repository.register(fullName, email, password)
-            _registerResult.value = result
-            _isLoading.value = false
+            try {
+                val result = repository.register(fullName, email, password)
+                _registerResult.value = result
+            } catch (e: Exception) {
+                _registerResult.value = Result.Error(e.message ?: "An error occurred.")
+            } finally {
+                _isLoading.value = false
+            }
         }
     }
 }

@@ -72,26 +72,37 @@ class HistoryActivity : AppCompatActivity() {
 
     }
 
-//    private fun observeViewModel() {
-//        viewModel.historyLiveData.observe(this) { response ->
-//            response?.predictions?.let { predictions ->
-//                // Membalikkan urutan data berdasarkan createdAt
-//                val sortedList = predictions.filterNotNull().sortedByDescending {
-//                    it.createdAt
-//                }
-//                adapter.setItems(sortedList)
-//            }
-//        }
-//
-//        viewModel.errorLiveData.observe(this) { error ->
-//            Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
-//        }
-//    }
-
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
 
     }
+
+//    private fun observeViewModel() {
+//        viewModel.isLoading.observe(this) { isLoading ->
+//            showLoading(isLoading)
+//        }
+//
+//        viewModel.historyLiveData.observe(this) { result ->
+//            when (result) {
+//                is Result.Loading -> {
+//                    showLoading(true)
+//                }
+//                is Result.Success -> {
+//                    showLoading(false)
+//                    val predictions = result.data.predictions?.filterNotNull()?.sortedByDescending {
+//                        it.createdAt
+//                    }
+//                    predictions?.let { sortedList ->
+//                        adapter.setItems(sortedList)
+//                    }
+//                }
+//                is Result.Error -> {
+//                    showLoading(false)
+//                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        }
+//    }
 
     private fun observeViewModel() {
         viewModel.isLoading.observe(this) { isLoading ->
@@ -100,9 +111,7 @@ class HistoryActivity : AppCompatActivity() {
 
         viewModel.historyLiveData.observe(this) { result ->
             when (result) {
-                is Result.Loading -> {
-                    showLoading(true)
-                }
+                is Result.Loading -> showLoading(true)
                 is Result.Success -> {
                     showLoading(false)
                     val predictions = result.data.predictions?.filterNotNull()?.sortedByDescending {
@@ -110,13 +119,29 @@ class HistoryActivity : AppCompatActivity() {
                     }
                     predictions?.let { sortedList ->
                         adapter.setItems(sortedList)
+                        binding.rvHistory.visibility = if (sortedList.isNotEmpty()) View.VISIBLE else View.GONE
                     }
                 }
                 is Result.Error -> {
                     showLoading(false)
-                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                    when (result.error) {
+                        "No Data" -> {
+                            binding.rvHistory.visibility = View.GONE
+                            binding.tvNoData.visibility = View.VISIBLE
+                        }
+                        "Error connection" -> {
+                            Toast.makeText(this, getString(R.string.connection_error), Toast.LENGTH_SHORT).show()
+                        }
+                        else -> {
+                            Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
             }
+        }
+
+        viewModel.noDataVisible.observe(this) { isVisible ->
+            binding.tvNoData.visibility = if (isVisible) View.VISIBLE else View.GONE
         }
     }
 
