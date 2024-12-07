@@ -209,6 +209,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:visibility="gone"
+            android:indeterminateTint="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/rv_history"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
