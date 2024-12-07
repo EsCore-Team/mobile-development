@@ -6,55 +6,62 @@
 
     <application
         android:allowBackup="true"
+        android:configChanges="uiMode|orientation|screenSize"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.EsCore"
-        android:configChanges="uiMode|orientation|screenSize"
-        android:screenOrientation="portrait"
         tools:targetApi="31">
-
         <!-- Daftar aktivitas -->
         <activity
             android:name=".view.detailHistory.DetailHistoryActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.history.HistoryActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.resultUpload.ResultUploadActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.upload.UploadActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.signup.SignUpActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.onboarding.OnboardingActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.login.LoginActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.main.MainActivity"
-            android:exported="true"
             android:configChanges="uiMode|orientation|screenSize"
+            android:exported="true"/>
+        <activity
+            android:name=".view.splashScreen.SplashScreenActivity"
+            android:theme="@style/noActionBar"
+            android:configChanges="uiMode|orientation|screenSize"
+            android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
+
 </manifest>
