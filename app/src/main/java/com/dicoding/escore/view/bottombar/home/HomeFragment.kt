@@ -50,11 +50,12 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         requireActivity().window.apply {
+            // Ubah warna status bar
             statusBarColor = ContextCompat.getColor(requireContext(), R.color.colorPrimary)
 
-            // Gunakan fallback untuk versi di bawah Android R
-            decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            decorView.systemUiVisibility = decorView.systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
         }
+
 
         // Inisialisasi RecyclerView
         setupRecyclerView()
