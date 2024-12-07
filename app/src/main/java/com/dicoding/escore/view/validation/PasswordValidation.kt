@@ -1,6 +1,7 @@
 package com.dicoding.escore.view.validation
 
 import android.content.Context
+import android.graphics.Typeface
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
@@ -42,6 +43,8 @@ class PasswordValidation @JvmOverloads constructor(
         inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
         gravity = Gravity.CENTER_VERTICAL
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
+
+        typeface = Typeface.DEFAULT
     }
 
     private fun validatePassword(password: CharSequence?) {
