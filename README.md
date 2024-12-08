@@ -1,0 +1,1 @@
+EsCore is an Android-based application designed to assist users in conducting an automatized assessment of Essay. With a modern and intuitive interface, EsCore offers an easy and efficient user experience.
