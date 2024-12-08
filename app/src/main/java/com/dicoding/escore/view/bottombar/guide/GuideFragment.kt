@@ -1,14 +1,11 @@
 package com.dicoding.escore.view.bottombar.guide
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.dicoding.escore.R
 import com.dicoding.escore.databinding.FragmentGuideBinding
 
@@ -25,8 +22,6 @@ class GuideFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(GuideViewModel::class.java)
 
         requireActivity().window.apply {
             statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)

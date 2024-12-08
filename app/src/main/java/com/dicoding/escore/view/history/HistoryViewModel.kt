@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.dicoding.escore.data.remote.Result
 import com.dicoding.escore.data.remote.UserRepository
 import com.dicoding.escore.data.remote.response.HistoryResponse
-import com.dicoding.escore.data.remote.response.LoginResponse
 import com.dicoding.escore.pref.SessionManager
 import kotlinx.coroutines.launch
 import retrofit2.HttpException

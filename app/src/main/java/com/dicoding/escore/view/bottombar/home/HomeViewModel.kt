@@ -78,22 +78,5 @@ class HomeViewModel(
             }
         }
     }
-
-//    fun fetchHistory(createdAt: String, title: String, score: String) {
-//        viewModelScope.launch {
-//            _historyLiveData.postValue(Result.Loading) // Indikasikan loading
-//            try {
-//                val email = sessionManager.getUserEmail()
-//                if (email.isNullOrEmpty()) {
-//                    _historyLiveData.postValue(Result.Error("Email not found in session."))
-//                    return@launch
-//                }
-//                val response = repository.getHistory(email, createdAt, title, score)
-//                _historyLiveData.postValue(Result.Success(response))
-//            } catch (e: Exception) {
-//                _historyLiveData.postValue(Result.Error(e.message ?: "An error occurred."))
-//            }
-//        }
-//    }
 }
 

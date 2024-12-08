@@ -6,12 +6,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.dicoding.escore.R
 import com.dicoding.escore.databinding.ActivityLoginBinding
@@ -57,40 +54,6 @@ class LoginActivity : AppCompatActivity() {
         observeViewModel()
     }
 
-//    private fun observeViewModel() {
-//        viewModel.isLoading.observe(this) { isLoading ->
-//            showLoading(isLoading)
-//        }
-//
-//        viewModel.loginResult.observe(this) { result ->
-//            when(result) {
-//                is Result.Loading -> {
-//                    showLoading(true)
-//                }
-//                is Result.Success -> {
-//                    showLoading(false)
-//                    val token = result.data.loginResult.token
-//                    val email = result.data.loginResult.email ?: "Email tidak tersedia"
-//                    val fullName = result.data.loginResult.fullName ?: "Nama tidak tersedia"
-//                    lifecycleScope.launch {
-//                        sessionManager.saveAuthToken(token)
-//                        sessionManager.saveUserEmail(email)
-//                        sessionManager.saveUserFullName(fullName)
-//                    }
-//                    Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
-//
-//                    navigateToMainActivity()
-//                }
-//                is Result.Error -> {
-//                    showLoading(false)
-////                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
-//                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        }
-//    }
-
-
     private fun observeViewModel() {
         viewModel.isLoading.observe(this) { isLoading ->
             showLoading(isLoading)
@@ -131,11 +94,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
-
-
-
-
     private fun navigateToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK

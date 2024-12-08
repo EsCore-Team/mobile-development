@@ -4,12 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.escore.data.remote.MLRepository
-import com.dicoding.escore.data.remote.UserRepository
-import com.dicoding.escore.di.Injection
 import com.dicoding.escore.di.InjectionML
-import com.dicoding.escore.view.login.LoginViewModel
-import com.dicoding.escore.view.main.MainViewModel
-import com.dicoding.escore.view.signup.SignUpViewModel
 import com.dicoding.escore.view.upload.UploadViewModel
 
 class ViewModelFactoryML(private val repository: MLRepository) : ViewModelProvider.NewInstanceFactory() {
