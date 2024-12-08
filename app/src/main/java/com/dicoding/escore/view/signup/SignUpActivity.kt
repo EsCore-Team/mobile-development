@@ -6,11 +6,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.dicoding.escore.R
 import com.dicoding.escore.databinding.ActivitySignUpBinding
 import com.dicoding.escore.view.ViewModelFactory
@@ -48,30 +45,6 @@ class SignUpActivity : AppCompatActivity() {
 
         observeViewModel()
     }
-
-//    private fun observeViewModel() {
-//        viewModel.isLoading.observe(this) { isLoading ->
-//            showLoading(isLoading)
-//        }
-//        viewModel.registerResult.observe(this) { result ->
-//            when(result) {
-//                is Result.Loading -> {
-//                    showLoading(true)
-//                }
-//                is Result.Success -> {
-//                    showLoading(false)
-//                    Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
-//                    val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
-//                    startActivity(intent)
-//                    finish()
-//                }
-//                is Result.Error -> {
-//                    showLoading(false)
-//                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        }
-//    }
 
     private fun observeViewModel() {
         viewModel.isLoading.observe(this) { isLoading ->
@@ -144,11 +117,6 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun playAnimation() {
-//        ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
-//            duration = 6000
-//            repeatCount = ObjectAnimator.INFINITE
-//            repeatMode = ObjectAnimator.REVERSE
-//        }.start()
 
         val title = ObjectAnimator.ofFloat(binding.titleTextView, View.ALPHA, 1f).setDuration(200)
         val nameText = ObjectAnimator.ofFloat(binding.nameTextView, View.ALPHA, 1f).setDuration(200)

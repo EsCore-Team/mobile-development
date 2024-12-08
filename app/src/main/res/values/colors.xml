@@ -7,11 +7,8 @@
     <color name="navy">#2D3D4F</color>
     <color name="navy_text">#083554</color>
     <color name="hyperlink">#005994</color>
-    <color name="button">#4A628A</color>
     <color name="red">#FF0000</color>
     <color name="text_toolbar">#7AB2D3</color>
-    <color name="green">#02C41F</color>
-    <color name="upload_button">#6C9BB6</color>
-    <color name="gray_dark">#808080</color>
     <color name="bottom_bar">#EBEBEB</color>
+    <color name="button">#4A628A</color>
 </resources>

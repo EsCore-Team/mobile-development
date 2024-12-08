@@ -13,43 +13,7 @@ import com.dicoding.escore.view.history.HistoryViewModel
 import com.dicoding.escore.view.login.LoginViewModel
 import com.dicoding.escore.view.main.MainViewModel
 import com.dicoding.escore.view.signup.SignUpViewModel
-import com.dicoding.escore.view.upload.UploadViewModel
 
-//class ViewModelFactory(private val repository: UserRepository) : ViewModelProvider.NewInstanceFactory() {
-//
-//    @Suppress("UNCHECKED_CAST")
-//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-//        return when {
-//            modelClass.isAssignableFrom(MainViewModel::class.java) -> {
-//                MainViewModel(repository) as T
-//            }
-//            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
-//                LoginViewModel(repository) as T
-//            }
-//            modelClass.isAssignableFrom(SignUpViewModel::class.java) -> {
-//                SignUpViewModel(repository) as T
-//            }            modelClass.isAssignableFrom(SignUpViewModel::class.java) -> {
-//                SignUpViewModel(repository) as T
-//            }
-//
-//            else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
-//        }
-//    }
-//
-//    companion object {
-//        @Volatile
-//        private var INSTANCE: ViewModelFactory? = null
-//        @JvmStatic
-//        fun getInstance(context: Context): ViewModelFactory {
-//            if (INSTANCE == null) {
-//                synchronized(ViewModelFactory::class.java) {
-//                    INSTANCE = ViewModelFactory(Injection.provideRepository(context))
-//                }
-//            }
-//            return INSTANCE as ViewModelFactory
-//        }
-//    }
-//}
 
 class ViewModelFactory(
     private val repository: UserRepository,
@@ -60,7 +24,7 @@ class ViewModelFactory(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
-                MainViewModel(repository) as T
+                MainViewModel() as T
             }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(repository) as T

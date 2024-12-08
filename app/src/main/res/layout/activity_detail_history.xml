@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/rounded_edittext"
-                android:hint="Title"
+                android:hint="@string/title"
                 android:gravity="top"
                 android:padding="12dp"
                 android:textColor="@color/black"
@@ -88,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Description"
+                android:text="@string/description"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:textColor="@color/black" />
@@ -106,7 +106,7 @@
                     android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Description content goes here"
+                    android:text="@string/description_content_goes_here"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     android:maxLines="5"
@@ -137,7 +137,7 @@
                         android:id="@+id/btn_more"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="More..."
+                        android:text="@string/more"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
                         android:textStyle="bold"
@@ -147,6 +147,7 @@
                         android:id="@+id/icon_more"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
+                        android:contentDescription="@string/icon_more"
                         android:src="@drawable/baseline_expand_more_24"
                         app:tint="@color/navy" />
                 </LinearLayout>
@@ -160,7 +161,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Score"
+                android:text="@string/score"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -206,7 +207,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="end"
-                android:text="Please refer to the guide!"
+                android:text="@string/please_refer_to_the_guide"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
                 android:textStyle="italic" />

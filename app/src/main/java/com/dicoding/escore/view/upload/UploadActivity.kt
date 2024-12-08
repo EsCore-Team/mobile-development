@@ -1,29 +1,21 @@
 package com.dicoding.escore.view.upload
 
-import android.app.Activity
 import android.content.Intent
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.lifecycleScope
 import com.dicoding.escore.R
 import com.dicoding.escore.data.remote.Result
-import com.dicoding.escore.data.remote.response.ModelMachineLearningResponse
 import com.dicoding.escore.databinding.ActivityUploadBinding
 import com.dicoding.escore.pref.SessionManager
 import com.dicoding.escore.view.ViewModelFactoryML
 import com.dicoding.escore.view.resultUpload.ResultUploadActivity
-import java.io.File
 
 
 class UploadActivity : AppCompatActivity() {

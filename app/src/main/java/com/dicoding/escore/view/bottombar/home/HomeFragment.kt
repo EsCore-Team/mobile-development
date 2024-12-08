@@ -8,14 +8,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowInsets
-import android.view.WindowInsetsController
-import android.view.WindowManager
-import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.escore.R
 import com.dicoding.escore.adapter.HistoryAdapter
@@ -24,10 +19,6 @@ import com.dicoding.escore.databinding.FragmentHomeBinding
 import com.dicoding.escore.view.ViewModelFactory
 import com.dicoding.escore.view.detailHistory.DetailHistoryActivity
 import com.dicoding.escore.view.history.HistoryActivity
-import com.dicoding.escore.view.history.HistoryViewModel
-import com.dicoding.escore.view.login.LoginActivity
-import com.dicoding.escore.view.onboarding.OnboardingActivity
-import com.dicoding.escore.view.signup.SignUpActivity
 import com.dicoding.escore.view.upload.UploadActivity
 
 class HomeFragment : Fragment() {

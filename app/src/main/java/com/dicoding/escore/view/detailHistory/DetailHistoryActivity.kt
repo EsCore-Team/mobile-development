@@ -1,21 +1,14 @@
 package com.dicoding.escore.view.detailHistory
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.dicoding.escore.R
 import com.dicoding.escore.databinding.ActivityDetailHistoryBinding
 import com.dicoding.escore.view.ViewModelFactory
-import com.dicoding.escore.view.bottombar.guide.GuideFragment
-import com.dicoding.escore.view.main.MainActivity
 
 
 class DetailHistoryActivity : AppCompatActivity() {
@@ -70,13 +63,13 @@ class DetailHistoryActivity : AppCompatActivity() {
                 // Collapse deskripsi
                 binding.description.maxLines = 5
                 binding.description.ellipsize = TextUtils.TruncateAt.END
-                binding.btnMore.text = "More..."
+                binding.btnMore.text = getString(R.string.more)
                 binding.iconMore.setImageResource(R.drawable.baseline_expand_more_24)
             } else {
                 // Expand deskripsi
                 binding.description.maxLines = Int.MAX_VALUE
                 binding.description.ellipsize = null
-                binding.btnMore.text = "Less"
+                binding.btnMore.text = getString(R.string.less)
                 binding.iconMore.setImageResource(R.drawable.baseline_expand_less_24)
             }
             isDescriptionExpanded = !isDescriptionExpanded

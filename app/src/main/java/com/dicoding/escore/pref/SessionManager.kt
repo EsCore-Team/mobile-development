@@ -38,11 +38,6 @@ class SessionManager(context: Context) {
         return preferences.getString(EMAIL_KEY, null)
     }
 
-    // Hapus email
-    fun clearUserEmail() {
-        preferences.edit().remove(EMAIL_KEY).apply()
-    }
-
     // Simpan full name
     fun saveUserFullName(fullName: String) {
         preferences.edit().putString(FULLNAME_KEY, fullName).apply()
@@ -63,11 +58,6 @@ class SessionManager(context: Context) {
         return preferences.getString(TITLE_KEY, null)
     }
 
-    // Hapus title
-    fun clearEssayTitle() {
-        preferences.edit().remove(TITLE_KEY).apply()
-    }
-
     // Simpan description
     fun saveEssayDescription(description: String) {
         preferences.edit().putString(DESCRIPTION_KEY, description).apply()
@@ -78,8 +68,4 @@ class SessionManager(context: Context) {
         return preferences.getString(DESCRIPTION_KEY, null)
     }
 
-    // Hapus description
-    fun clearEssayDescription() {
-        preferences.edit().remove(DESCRIPTION_KEY).apply()
-    }
 }

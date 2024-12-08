@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.escore.data.remote.response.PredictionsItem
 import com.dicoding.escore.databinding.ItemHistoryBinding
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 
 class HistoryAdapter(private val onItemClicked: (String) -> Unit) : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {

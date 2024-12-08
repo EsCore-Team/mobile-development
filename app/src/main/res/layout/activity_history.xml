@@ -58,7 +58,7 @@
         android:id="@+id/tv_no_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No Data History"
+        android:text="@string/no_data_history"
         android:textSize="16sp"
         android:textColor="@color/black"
         android:gravity="center"

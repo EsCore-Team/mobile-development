@@ -9,7 +9,3 @@ data class SignUpResponse(
     @field:SerializedName("error")
     val error: Boolean
 )
-
-//
-//    @field:SerializedName("error")
-//    val error: Boolean,
