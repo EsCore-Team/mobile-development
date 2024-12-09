@@ -1,4 +1,4 @@
-<img src="assets/EsCore.png" alt="EsCore Preview" width="300" height="300" align="center" />
+<img src="assets/EsCore.png" alt="EsCore Preview" align="center" />
 
 # EsCore: Automated Essay Scoring with AI for Objective and Effective Assessment
 
@@ -12,9 +12,9 @@
 Harness the power of AI to deliver precise and impartial essay evaluations, reducing grading time without compromising accuracy.
 
 <div align="center">
-  <img src="assets/home.png" alt="Home Screen" width="250" height="450" style="margin-right: 10px;" />
-  <img src="assets/filled_essay.png" alt="Filled Essay" width="250" height="450" style="margin-right: 10px;" />
-  <img src="assets/result.png" alt="Graded Essay" width="250" height="450" />
+  <img src="assets/home.png" alt="Home Screen" width="250" style="margin-right: 10px;" />
+  <img src="assets/filled_essay.png" alt="Filled Essay" width="250" style="margin-right: 10px;" />
+  <img src="assets/result.png" alt="Graded Essay" width="250" />
 </div>
 
 ---
@@ -23,8 +23,8 @@ Harness the power of AI to deliver precise and impartial essay evaluations, redu
 Provides actionable feedback to help educators and students improve essay quality. This feature drives better learning outcomes by offering constructive and targeted guidance.
 
 <div align="center">
-  <img src="assets/guide.png" alt="Guide" width="250" height="450" style="margin-right: 10px;" />
-  <img src="assets/result.png" alt="Graded Essay" width="250" height="450" />
+  <img src="assets/guide.png" alt="Guide" width="250" style="margin-right: 10px;" />
+  <img src="assets/result.png" alt="Graded Essay" width="250" />
 </div>
 
 ---
@@ -33,8 +33,8 @@ Provides actionable feedback to help educators and students improve essay qualit
 Simplifies access to previously assessed essays, enabling users to maintain and review essay records effortlessly.
 
 <div align="center">
-  <img src="assets/history.png" alt="History" width="250" height="450" style="margin-right: 10px;" />
-  <img src="assets/detail_history.png" alt="Detail History" width="250" height="450" />
+  <img src="assets/history.png" alt="History" width="250" style="margin-right: 10px;" />
+  <img src="assets/detail_history.png" alt="Detail History" width="250" />
 </div>
 
 ---
