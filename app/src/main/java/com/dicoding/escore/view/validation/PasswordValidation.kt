@@ -47,16 +47,20 @@ class PasswordValidation @JvmOverloads constructor(
         typeface = Typeface.DEFAULT
     }
 
-    private fun validatePassword(password: CharSequence?) {
+    fun validatePassword(password: CharSequence?): Boolean {
         if (textInputLayout == null) {
             textInputLayout = findParentTextInputLayout()
         }
-        if (password != null && password.length < 8) {
-            textInputLayout?.error = context.getString(R.string.password_validation)
-        } else {
+
+        return if (password != null && password.length >= 8) {
             textInputLayout?.error = null
+            true
+        } else {
+            textInputLayout?.error = context.getString(R.string.password_validation)
+            false
         }
     }
+
 
     private fun findParentTextInputLayout(): TextInputLayout? {
         var parentView: ViewParent? = parent

@@ -112,5 +112,6 @@
     <string name="upload_button">Upload</string>
     <string name="less">Less</string>
     <string name="name_user">Name User</string>
+    <string name="email_already_exists">Email already exist!</string>
 
 </resources>
