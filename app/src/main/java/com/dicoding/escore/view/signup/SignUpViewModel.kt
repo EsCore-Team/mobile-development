@@ -8,6 +8,7 @@ import com.dicoding.escore.data.remote.UserRepository
 import com.dicoding.escore.data.remote.response.SignUpResponse
 import com.dicoding.escore.data.remote.Result
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class SignUpViewModel(private val repository: UserRepository): ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
@@ -22,6 +23,17 @@ class SignUpViewModel(private val repository: UserRepository): ViewModel() {
             try {
                 val result = repository.register(fullName, email, password)
                 _registerResult.value = result
+            } catch (e: HttpException) {
+                // Tangani error HTTP
+                when (e.code()) {
+                    400 -> {
+                        _registerResult.value = Result.Error("Email already exists!")
+                    }
+                    else -> {
+                        // Tangani error HTTP lainnya
+                        _registerResult.value = Result.Error("An error occurred: ${e.message()}")
+                    }
+                }
             } catch (e: Exception) {
                 _registerResult.value = Result.Error(e.message ?: "An error occurred.")
             } finally {

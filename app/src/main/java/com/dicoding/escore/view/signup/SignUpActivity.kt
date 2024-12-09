@@ -74,6 +74,12 @@ class SignUpActivity : AppCompatActivity() {
                     if (errorMessage.contains("Connection error", true) || errorMessage.contains("unable to resolve host", true)) {
                         // Tampilkan toast jika masalah koneksi
                         Toast.makeText(this, getString(R.string.connection_error), Toast.LENGTH_SHORT).show()
+                    } else if (errorMessage.contains("HTTP 400", true)) {
+                        Toast.makeText(
+                            this,
+                            getString(R.string.email_already_exists),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     } else {
                         // Tampilkan pesan error lainnya
                         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
