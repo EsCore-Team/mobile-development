@@ -19,6 +19,7 @@ class EmailValidation @JvmOverloads constructor(
     private var textInputLayout: TextInputLayout? = null
     private var isInitialized = false
 
+
     init {
         setupView()
         addTextChangedListener(object : TextWatcher {
@@ -44,17 +45,21 @@ class EmailValidation @JvmOverloads constructor(
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
     }
 
-    private fun validateEmail(email: CharSequence?) {
+    fun validateEmail(email: CharSequence?): Boolean {
         if (textInputLayout == null) {
             textInputLayout = findParentTextInputLayout()
         }
+
         val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
-        if (email != null && !email.matches(emailPattern.toRegex())) {
-            textInputLayout?.error = context.getString(R.string.email_validation)
-        } else {
+        return if (email != null && email.matches(emailPattern.toRegex())) {
             textInputLayout?.error = null
+            true
+        } else {
+            textInputLayout?.error = context.getString(R.string.email_validation)
+            false
         }
     }
+
 
     private fun findParentTextInputLayout(): TextInputLayout? {
         var parentView: ViewParent? = parent

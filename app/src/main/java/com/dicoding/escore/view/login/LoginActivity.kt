@@ -17,6 +17,8 @@ import com.dicoding.escore.view.ViewModelFactory
 import com.dicoding.escore.data.remote.Result
 import com.dicoding.escore.view.main.MainActivity
 import com.dicoding.escore.view.signup.SignUpActivity
+import com.dicoding.escore.view.validation.EmailValidation
+import com.dicoding.escore.view.validation.PasswordValidation
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
@@ -108,22 +110,30 @@ class LoginActivity : AppCompatActivity() {
 
     private fun isInputValid(email: String, password: String): Boolean {
         var isValid = true
+
+        val emailValidation = binding.emailEditText as? EmailValidation
         if (email.isEmpty()) {
             binding.emailEditTextLayout.error = getString(R.string.empty_email)
+            isValid = false
+        } else if ((emailValidation == null || !emailValidation.validateEmail(email))) {
             isValid = false
         } else {
             binding.emailEditTextLayout.error = null
         }
 
+        val passwordValidation = binding.passwordEditText as? PasswordValidation
+        val isPasswordValid = passwordValidation?.validatePassword(password) ?: false
         if (password.isEmpty()) {
             binding.passwordEditTextLayout.error = getString(R.string.empty_password)
             isValid = false
-        } else {
+        } else if(!isPasswordValid){
+            isValid = false
+        }else {
             binding.passwordEditTextLayout.error = null
         }
-
         return isValid
     }
+
 
     private fun playAnimation() {
 
