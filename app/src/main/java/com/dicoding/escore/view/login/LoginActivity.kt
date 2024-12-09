@@ -83,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
                     if (errorMessage.contains("Connection error", true) || errorMessage.contains("unable to resolve host", true)) {
                         // Tampilkan toast jika ada masalah koneksi atau masalah host
                         Toast.makeText(this, getString(R.string.connection_error), Toast.LENGTH_SHORT).show()
-                    } else if (errorMessage.contains("Email and password not found", true)|| errorMessage.contains("HTTP 401", true)) {
+                    } else if (errorMessage.contains("Email and password not found", true)|| errorMessage.contains("HTTP 401", true)|| errorMessage.contains("HTTP 400", true)) {
                         // Tampilkan error lainnya (termasuk "Email and password not found")
                         Toast.makeText(this, getString(R.string.password_email_not_found), Toast.LENGTH_SHORT).show()
                     } else {
