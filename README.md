@@ -1,4 +1,4 @@
-<img src="assets/EsCore.png" alt="EsCore Preview" align="center" />
+<img src="assets/EsCoreCover.png" alt="EsCore Preview" align="center" />
 
 # EsCore: Automated Essay Scoring with AI for Objective and Effective Assessment
 
