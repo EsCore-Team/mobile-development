@@ -9,10 +9,7 @@ import kotlinx.parcelize.Parcelize
 @Entity (tableName = "history")
 @Parcelize
 data class HistoryEntity (
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    val id: String,
-
+    @PrimaryKey
     @ColumnInfo(name = "email")
     val email: String,
 

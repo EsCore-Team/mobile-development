@@ -1,5 +1,7 @@
 package com.dicoding.escore.data.remote
 
+import androidx.lifecycle.MediatorLiveData
+import com.dicoding.escore.data.local.entity.HistoryEntity
 import com.dicoding.escore.data.local.room.HistoryDao
 import com.dicoding.escore.data.remote.response.HistoryResponse
 import com.dicoding.escore.data.remote.response.LoginResponse
@@ -46,19 +48,69 @@ class UserRepository private constructor(
         }
     }
 
+//    suspend fun getHistory(
+//        email: String,
+//        createdAt: String,
+//        title: String,
+//        score: String
+//    ): HistoryResponse {
+//        return apiService.history(
+//            email = email,
+//            createdAt = createdAt,
+//            title = title,
+//            score = score
+//        )
+//    }
+
     suspend fun getHistory(
         email: String,
         createdAt: String,
         title: String,
         score: String
-    ): HistoryResponse {
-        return apiService.history(
-            email = email,
-            createdAt = createdAt,
-            title = title,
-            score = score
-        )
+    ): Result<HistoryResponse> {
+        val result = MediatorLiveData<Result<List<HistoryEntity>>>()
+
+        return withContext(Dispatchers.IO) {
+            try {
+                // Memanggil API untuk mendapatkan data riwayat
+                val response = apiService.history(
+                    email = email,
+                    createdAt = createdAt,
+                    title = title,
+                    score = score
+                )
+
+                if (response.predictions.isNullOrEmpty()) {
+                    Result.Error("No Data")
+                } else {
+                    // Opsional: Simpan data ke dalam database lokal
+                    appExecutors.diskIO.execute {
+                        val historyList = response.predictions.map {
+                            HistoryEntity(
+                                email = email,
+                                createdAt = createdAt,
+                                title = title,
+                                score = score
+                            )
+                        }
+                        historyDao.insertHistory(historyList)
+                    }
+
+                    // Mengambil data lokal dari newsDao
+                    val localData = historyDao.getHistory()
+                    result.addSource(localData) { newData: List<HistoryEntity> ->
+                        result.value = Result.Success(newData)
+                    }
+
+                    Result.Success(response)
+                }
+            } catch (e: Exception) {
+                Result.Error(e.message ?: "An error occurred.")
+            }
+        }
     }
+
+
 
     suspend fun getDetailHistory(email: String, id: String): HistoryResponse {
         return apiService.getDetailHistory(email, id)
