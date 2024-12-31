@@ -104,8 +104,8 @@ class HomeFragment : Fragment() {
                         it.createdAt
                     }
 
-                    // Batasi hanya 2 item pertama
-                    val limitedPredictions = predictions?.take(2)
+                    // Batasi hanya 3 item pertama
+                    val limitedPredictions = predictions?.take(3)
 
                     limitedPredictions?.let { sortedList ->
                         adapter.setItems(sortedList)
