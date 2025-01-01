@@ -23,8 +23,6 @@ class HistoryViewModel(
     private val _historyLiveData = MutableLiveData<Result<HistoryResponse>>()
     val historyLiveData: LiveData<Result<HistoryResponse>> get() = _historyLiveData
 
-    val localHistoryLiveData: LiveData<List<HistoryEntity>> = repository.getAllHistoryFromLocal()
-
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
@@ -52,18 +50,6 @@ class HistoryViewModel(
                     _historyLiveData.postValue(Result.Error("No Data")) // No data case
                     _noDataVisible.postValue(true)
                 } else {
-
-                    // Save response to local database
-                    val historyEntities = response.predictions.map {
-                        HistoryEntity(
-                            id = it?.id,
-                            title = it?.title,
-                            score = it?.predictedResult?.score,
-                            createdAt = it?.createdAt
-                        )
-                    }
-                    repository.insertHistoryToLocal(historyEntities)
-
                     _historyLiveData.postValue(Result.Success(response))
                     _noDataVisible.postValue(false)
                 }

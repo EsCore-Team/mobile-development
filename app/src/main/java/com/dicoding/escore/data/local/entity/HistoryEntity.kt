@@ -11,7 +11,7 @@ import kotlinx.parcelize.Parcelize
 data class HistoryEntity (
     @PrimaryKey
     @ColumnInfo(name = "id")
-    var id: String? = null,
+    var id: String,
 
     @ColumnInfo(name = "title")
     var title: String? = null,

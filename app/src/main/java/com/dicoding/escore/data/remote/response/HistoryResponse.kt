@@ -29,7 +29,7 @@ data class PredictionsItem(
 	val predictedResult: PredictedResult2? = null,
 
 	@field:SerializedName("id")
-	val id: String? = null,
+	val id: String,
 
 	@field:SerializedName("title")
 	val title: String? = null,

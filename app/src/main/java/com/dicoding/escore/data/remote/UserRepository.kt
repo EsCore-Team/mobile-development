@@ -1,8 +1,10 @@
 package com.dicoding.escore.data.remote
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
 import com.dicoding.escore.data.local.entity.HistoryEntity
 import com.dicoding.escore.data.local.room.HistoryDao
+import com.dicoding.escore.data.local.room.HistoryDatabase
 import com.dicoding.escore.data.remote.response.HistoryResponse
 import com.dicoding.escore.data.remote.response.LoginResponse
 import com.dicoding.escore.data.remote.response.SignUpResponse
@@ -63,13 +65,6 @@ class UserRepository private constructor(
         )
     }
 
-    suspend fun insertHistoryToLocal(history: List<HistoryEntity>) {
-        historyDao.insert(history)
-    }
-
-    fun getAllHistoryFromLocal(): LiveData<List<HistoryEntity>> {
-        return historyDao.getAllHistory()
-    }
 
     suspend fun getDetailHistory(email: String, id: String): HistoryResponse {
         return apiService.getDetailHistory(email, id)
