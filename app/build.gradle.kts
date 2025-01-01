@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.room.common)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -73,6 +74,10 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
     implementation(libs.androidx.core.splashscreen)
-    implementation(libs.androidx.room.runtime)
     ksp(libs.room.compiler)
+    implementation(libs.androidx.room.runtime)
+    implementation (libs.androidx.room.paging) // Versi Room yang kompatibel
+    implementation (libs.androidx.paging.runtime.ktx) // Versi Paging runtime
+    implementation (libs.androidx.room.ktx) // Room KTX untuk coroutine support
+
 }

@@ -9,9 +9,6 @@ import com.dicoding.escore.utils.AppExecutors
 object Injection {
     fun provideRepository(context: Context): UserRepository {
         val apiService = ApiConfig.getApiService()
-        val database = HistoryDatabase.getInstance(context)
-        val dao = database.historyDao()
-        val appExecutors = AppExecutors()
-        return UserRepository.getInstance(apiService, dao, appExecutors)
+        return UserRepository.getInstance(apiService)
     }
 }

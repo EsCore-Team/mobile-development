@@ -1,6 +1,7 @@
 package com.dicoding.escore.data.local.room
 
 import androidx.lifecycle.LiveData
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -10,12 +11,12 @@ import com.dicoding.escore.data.local.entity.HistoryEntity
 
 @Dao
 interface HistoryDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertStory(story: List<HistoryEntity>)
+
     @Query("SELECT * FROM history ORDER BY createdAt DESC")
-    fun getHistory(): LiveData<List<HistoryEntity>>
+    fun getAllStory(): PagingSource<Int, HistoryEntity>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertHistory(news: List<HistoryEntity>)
-
-    @Update
-    fun updateHistory(news: HistoryEntity)
+    @Query("DELETE FROM history")
+    suspend fun deleteAll()
 }

@@ -5,20 +5,33 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.dicoding.escore.data.local.entity.HistoryEntity
+import com.dicoding.escore.data.local.entity.RemoteEntity
 
-@Database(entities = [HistoryEntity::class], version = 1, exportSchema = false)
+
+@Database(
+    entities = [HistoryEntity::class , RemoteEntity::class],
+    version = 2,
+    exportSchema = false
+)
 abstract class HistoryDatabase : RoomDatabase() {
     abstract fun historyDao(): HistoryDao
+    abstract fun remoteDao(): RemoteDao
 
     companion object {
         @Volatile
-        private var instance: HistoryDatabase? = null
-        fun getInstance(context: Context): HistoryDatabase =
-            instance ?: synchronized(this) {
-                instance ?: Room.databaseBuilder(
+        private var INSTANCE: HistoryDatabase? = null
+
+        @JvmStatic
+        fun getDatabase(context: Context): HistoryDatabase {
+            return INSTANCE ?: synchronized(this) {
+                INSTANCE ?: Room.databaseBuilder(
                     context.applicationContext,
-                    HistoryDatabase::class.java, "History.db"
-                ).build()
+                    HistoryDatabase::class.java, "history_database"
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
+                    .also { INSTANCE = it }
             }
+        }
     }
 }
