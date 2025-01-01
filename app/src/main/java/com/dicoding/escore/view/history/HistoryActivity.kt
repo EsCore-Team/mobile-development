@@ -11,10 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.escore.R
 import com.dicoding.escore.adapter.HistoryAdapter
+import com.dicoding.escore.data.local.entity.HistoryEntity
 import com.dicoding.escore.databinding.ActivityHistoryBinding
 import com.dicoding.escore.view.ViewModelFactory
 import com.dicoding.escore.view.detailHistory.DetailHistoryActivity
 import com.dicoding.escore.data.remote.Result
+import com.dicoding.escore.data.remote.response.PredictedResult
+import com.dicoding.escore.data.remote.response.PredictedResult2
+import com.dicoding.escore.data.remote.response.PredictionsItem
 
 class HistoryActivity : AppCompatActivity() {
     private val viewModel by viewModels<HistoryViewModel> {
@@ -53,7 +57,14 @@ class HistoryActivity : AppCompatActivity() {
         observeViewModel()
 
         // Fetch history
-        viewModel.fetchHistory(createdAt = "", title = "", score = "")
+//        viewModel.fetchHistory(createdAt = "", title = "", score = "")
+        viewModel.localHistoryLiveData.observe(this) { historyList ->
+            if (historyList.isNullOrEmpty()) {
+                viewModel.fetchHistory(createdAt = "", title = "", score = "")
+            } else {
+                displayLocalData(historyList)
+            }
+        }
 
     }
 
@@ -61,6 +72,47 @@ class HistoryActivity : AppCompatActivity() {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
 
     }
+
+//    private fun observeViewModel() {
+//        viewModel.isLoading.observe(this) { isLoading ->
+//            showLoading(isLoading)
+//        }
+//
+//        viewModel.historyLiveData.observe(this) { result ->
+//            when (result) {
+//                is Result.Loading -> showLoading(true)
+//                is Result.Success -> {
+//                    showLoading(false)
+//                    val predictions = result.data.predictions?.filterNotNull()?.sortedByDescending {
+//                        it.createdAt
+//                    }
+//                    predictions?.let { sortedList ->
+//                        adapter.setItems(sortedList)
+//                        binding.rvHistory.visibility = if (sortedList.isNotEmpty()) View.VISIBLE else View.GONE
+//                    }
+//                }
+//                is Result.Error -> {
+//                    showLoading(false)
+//                    when (result.error) {
+//                        "No Data" -> {
+//                            binding.rvHistory.visibility = View.GONE
+//                            binding.tvNoData.visibility = View.VISIBLE
+//                        }
+//                        "Error connection" -> {
+//                            Toast.makeText(this, getString(R.string.connection_error), Toast.LENGTH_SHORT).show()
+//                        }
+//                        else -> {
+//                            Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        viewModel.noDataVisible.observe(this) { isVisible ->
+//            binding.tvNoData.visibility = if (isVisible) View.VISIBLE else View.GONE
+//        }
+//    }
 
     private fun observeViewModel() {
         viewModel.isLoading.observe(this) { isLoading ->
@@ -102,4 +154,23 @@ class HistoryActivity : AppCompatActivity() {
             binding.tvNoData.visibility = if (isVisible) View.VISIBLE else View.GONE
         }
     }
+
+    private fun displayLocalData(historyList: List<HistoryEntity>) {
+        binding.tvNoData.visibility = View.GONE
+        binding.rvHistory.visibility = View.VISIBLE
+
+        // Konversi `HistoryEntity` menjadi `PredictionsItem`
+        val predictions = historyList.map { entity ->
+            PredictionsItem(
+                id = entity.id,
+                title = entity.title,
+                createdAt = entity.createdAt,
+                predictedResult = PredictedResult2(score = entity.score)
+            )
+        }
+
+        // Set data ke adapter
+        adapter.setItems(predictions)
+    }
+
 }

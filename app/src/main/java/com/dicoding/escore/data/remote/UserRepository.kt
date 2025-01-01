@@ -1,15 +1,22 @@
 package com.dicoding.escore.data.remote
 
+import androidx.lifecycle.LiveData
+import com.dicoding.escore.data.local.entity.HistoryEntity
+import com.dicoding.escore.data.local.room.HistoryDao
 import com.dicoding.escore.data.remote.response.HistoryResponse
 import com.dicoding.escore.data.remote.response.LoginResponse
 import com.dicoding.escore.data.remote.response.SignUpResponse
 import com.dicoding.escore.data.remote.retrofit.ApiService
+import com.dicoding.escore.utils.AppExecutors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
 class UserRepository private constructor(
-    private val apiService : ApiService
+    private val apiService : ApiService,
+    private val historyDao: HistoryDao,
+    private val appExecutors: AppExecutors
+
 ) {
     suspend fun login(email: String, password: String): Result<LoginResponse> {
         return withContext(Dispatchers.IO) {
@@ -56,6 +63,14 @@ class UserRepository private constructor(
         )
     }
 
+    suspend fun insertHistoryToLocal(history: List<HistoryEntity>) {
+        historyDao.insert(history)
+    }
+
+    fun getAllHistoryFromLocal(): LiveData<List<HistoryEntity>> {
+        return historyDao.getAllHistory()
+    }
+
     suspend fun getDetailHistory(email: String, id: String): HistoryResponse {
         return apiService.getDetailHistory(email, id)
     }
@@ -64,9 +79,11 @@ class UserRepository private constructor(
         @Volatile
         private var INSTANCE: UserRepository? = null
         fun getInstance(
-            apiService: ApiService
+            apiService: ApiService,
+            historyDao: HistoryDao,
+            appExecutors: AppExecutors
         ): UserRepository = INSTANCE ?: synchronized(this) {
-            INSTANCE ?: UserRepository(apiService)
+            INSTANCE ?: UserRepository(apiService, historyDao, appExecutors)
         }.also { INSTANCE = it }
     }
 }
