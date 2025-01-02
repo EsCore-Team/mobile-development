@@ -134,6 +134,26 @@ class HomeViewModel(
                 _noDataVisible.value = true
                 _isLoading.value = false
             }
+            catch (e: UnknownHostException) {
+                _historyLiveData.value = Result.Error("Error connection")
+                _noDataVisible.value = true
+            } catch (e: HttpException) {
+                if (e.code() == 404) {
+                    _historyLiveData.value = Result.Error("No Data")
+                    _noDataVisible.value = true
+                } else {
+                    _historyLiveData.value = Result.Error(e.message ?: "An error occurred.")
+                    _noDataVisible.value = true
+                }
+            } catch (e: IOException) {
+                _historyLiveData.value = Result.Error("Error connection")
+                _noDataVisible.value = true
+            } catch (e: Exception) {
+                _historyLiveData.value = Result.Error(e.message ?: "An error occurred.")
+                _noDataVisible.value = true
+            } finally {
+                _isLoading.value = false
+            }
         }
     }
 
