@@ -1,12 +1,15 @@
 package com.dicoding.escore.view.history
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +22,8 @@ import com.dicoding.escore.view.detailHistory.DetailHistoryActivity
 import com.dicoding.escore.data.remote.Result
 import com.dicoding.escore.data.remote.response.PredictedResult2
 import com.dicoding.escore.data.remote.response.PredictionsItem
+import com.dicoding.escore.view.bottombar.home.HomeViewModel
+
 
 class HistoryActivity : AppCompatActivity() {
     private val viewModel by viewModels<HistoryViewModel> {
@@ -66,54 +71,11 @@ class HistoryActivity : AppCompatActivity() {
 
     }
 
-//    private fun observeViewModel() {
-//        viewModel.isLoading.observe(this) { isLoading ->
-//            showLoading(isLoading)
-//        }
-//
-//        viewModel.historyLiveData.observe(this) { result ->
-//            when (result) {
-//                is Result.Loading -> showLoading(true)
-//                is Result.Success -> {
-//                    showLoading(false)
-//                    val predictions = result.data.predictions?.filterNotNull()?.sortedByDescending {
-//                        it.createdAt
-//                    }
-//                    predictions?.let { sortedList ->
-//                        adapter.setItems(sortedList)
-//                        binding.rvHistory.visibility = if (sortedList.isNotEmpty()) View.VISIBLE else View.GONE
-//                    }
-//                }
-//                is Result.Error -> {
-//                    showLoading(false)
-//                    when (result.error) {
-//                        "No Data" -> {
-//                            binding.rvHistory.visibility = View.GONE
-//                            binding.tvNoData.visibility = View.VISIBLE
-//                        }
-//                        "Error connection" -> {
-//                            Toast.makeText(this, getString(R.string.connection_error), Toast.LENGTH_SHORT).show()
-//                        }
-//                        else -> {
-//                            Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//
-//        viewModel.noDataVisible.observe(this) { isVisible ->
-//            binding.tvNoData.visibility = if (isVisible) View.VISIBLE else View.GONE
-//        }
-//    }
-
     private fun observeViewModel() {
-        // Observasi untuk indikator loading
         viewModel.isLoading.observe(this) { isLoading ->
             showLoading(isLoading)
         }
 
-        // Observasi data history
         viewModel.historyLiveData.observe(this) { result ->
             when (result) {
                 is Result.Loading -> showLoading(true)
@@ -146,12 +108,5 @@ class HistoryActivity : AppCompatActivity() {
                 }
             }
         }
-
-        // Observasi visibilitas "No Data"
-        viewModel.noDataVisible.observe(this) { isVisible ->
-            binding.tvNoData.visibility = if (isVisible) View.VISIBLE else View.GONE
-        }
     }
-
-
 }

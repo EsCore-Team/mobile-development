@@ -168,7 +168,7 @@ class HistoryViewModel(
     private val _noDataVisible = MutableLiveData<Boolean>()
     val noDataVisible: LiveData<Boolean> = _noDataVisible
 
-    // Fungsi untuk memuat data history
+
     fun fetchHistory(createdAt: String, title: String, score: String) {
         viewModelScope.launch {
             _isLoading.value = true
@@ -188,46 +188,27 @@ class HistoryViewModel(
                 // Observasi hasil dari repository
                 historyResult.observeForever { result ->
                     when (result) {
-                        is Result.Loading -> {
-                            _historyLiveData.value = Result.Loading
-                        }
+                        is Result.Loading -> _isLoading.value = true
                         is Result.Success -> {
-                            if (result.data.isNullOrEmpty()) {
-                                _historyLiveData.value = Result.Error("No Data")
-                                _noDataVisible.value = true
-                            } else {
-                                _historyLiveData.value = Result.Success(result.data)
-                                _noDataVisible.value = false
-                            }
+                            _historyLiveData.value = Result.Success(result.data)
+                            _noDataVisible.value = result.data.isNullOrEmpty()
+                            _isLoading.value = false
                         }
                         is Result.Error -> {
                             _historyLiveData.value = Result.Error(result.error)
                             _noDataVisible.value = true
+                            _isLoading.value = false
                         }
                     }
                 }
-            } catch (e: UnknownHostException) {
-                _historyLiveData.value = Result.Error("Error connection")
-                _noDataVisible.value = true
-            } catch (e: HttpException) {
-                if (e.code() == 404) {
-                    _historyLiveData.value = Result.Error("No Data")
-                    _noDataVisible.value = true
-                } else {
-                    _historyLiveData.value = Result.Error(e.message ?: "An error occurred.")
-                    _noDataVisible.value = true
-                }
-            } catch (e: IOException) {
-                _historyLiveData.value = Result.Error("Error connection")
-                _noDataVisible.value = true
             } catch (e: Exception) {
                 _historyLiveData.value = Result.Error(e.message ?: "An error occurred.")
                 _noDataVisible.value = true
-            } finally {
                 _isLoading.value = false
             }
         }
     }
+
 }
 
 
