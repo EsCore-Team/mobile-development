@@ -66,22 +66,67 @@ class HistoryActivity : AppCompatActivity() {
 
     }
 
+//    private fun observeViewModel() {
+//        viewModel.isLoading.observe(this) { isLoading ->
+//            showLoading(isLoading)
+//        }
+//
+//        viewModel.historyLiveData.observe(this) { result ->
+//            when (result) {
+//                is Result.Loading -> showLoading(true)
+//                is Result.Success -> {
+//                    showLoading(false)
+//                    val predictions = result.data.predictions?.filterNotNull()?.sortedByDescending {
+//                        it.createdAt
+//                    }
+//                    predictions?.let { sortedList ->
+//                        adapter.setItems(sortedList)
+//                        binding.rvHistory.visibility = if (sortedList.isNotEmpty()) View.VISIBLE else View.GONE
+//                    }
+//                }
+//                is Result.Error -> {
+//                    showLoading(false)
+//                    when (result.error) {
+//                        "No Data" -> {
+//                            binding.rvHistory.visibility = View.GONE
+//                            binding.tvNoData.visibility = View.VISIBLE
+//                        }
+//                        "Error connection" -> {
+//                            Toast.makeText(this, getString(R.string.connection_error), Toast.LENGTH_SHORT).show()
+//                        }
+//                        else -> {
+//                            Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        viewModel.noDataVisible.observe(this) { isVisible ->
+//            binding.tvNoData.visibility = if (isVisible) View.VISIBLE else View.GONE
+//        }
+//    }
+
     private fun observeViewModel() {
+        // Observasi untuk indikator loading
         viewModel.isLoading.observe(this) { isLoading ->
             showLoading(isLoading)
         }
 
+        // Observasi data history
         viewModel.historyLiveData.observe(this) { result ->
             when (result) {
                 is Result.Loading -> showLoading(true)
                 is Result.Success -> {
                     showLoading(false)
-                    val predictions = result.data.predictions?.filterNotNull()?.sortedByDescending {
-                        it.createdAt
-                    }
-                    predictions?.let { sortedList ->
+                    val sortedList = result.data.sortedByDescending { it.createdAt }
+                    if (sortedList.isNotEmpty()) {
                         adapter.setItems(sortedList)
-                        binding.rvHistory.visibility = if (sortedList.isNotEmpty()) View.VISIBLE else View.GONE
+                        binding.rvHistory.visibility = View.VISIBLE
+                        binding.tvNoData.visibility = View.GONE
+                    } else {
+                        binding.rvHistory.visibility = View.GONE
+                        binding.tvNoData.visibility = View.VISIBLE
                     }
                 }
                 is Result.Error -> {
@@ -102,6 +147,7 @@ class HistoryActivity : AppCompatActivity() {
             }
         }
 
+        // Observasi visibilitas "No Data"
         viewModel.noDataVisible.observe(this) { isVisible ->
             binding.tvNoData.visibility = if (isVisible) View.VISIBLE else View.GONE
         }

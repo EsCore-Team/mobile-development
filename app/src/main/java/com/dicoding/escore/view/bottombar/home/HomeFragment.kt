@@ -90,6 +90,50 @@ class HomeFragment : Fragment() {
 
     }
 
+//    private fun observeViewModel() {
+//        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+//            showLoading(isLoading)
+//        }
+//
+//        viewModel.historyLiveData.observe(viewLifecycleOwner) { result ->
+//            when (result) {
+//                is Result.Loading -> showLoading(true)
+//                is Result.Success -> {
+//                    showLoading(false)
+//                    // Ambil 3 item teratas dari daftar yang sudah diurutkan
+//                    val sortedList = result.data.sortedByDescending { it.createdAt }.take(3)
+//                    if (sortedList.isNotEmpty()) {
+//                        adapter.setItems(sortedList)
+//                        binding.rvHistory.visibility = View.VISIBLE
+//                        binding.tvNoData.visibility = View.GONE
+//                    } else {
+//                        binding.rvHistory.visibility = View.GONE
+//                        binding.tvNoData.visibility = View.VISIBLE
+//                    }
+//                }
+//                is Result.Error -> {
+//                    showLoading(false)
+//                    when (result.error) {
+//                        "No Data" -> {
+//                            binding.rvHistory.visibility = View.GONE
+//                            binding.tvNoData.visibility = View.VISIBLE
+//                        }
+//                        "Error connection" -> {
+//                            Toast.makeText(requireContext(), getString(R.string.connection_error), Toast.LENGTH_SHORT).show()
+//                        }
+//                        else -> {
+//                            Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        viewModel.noDataVisible.observe(viewLifecycleOwner) { isVisible ->
+//            binding.tvNoData.visibility = if (isVisible) View.VISIBLE else View.GONE
+//        }
+//    }
+
     private fun observeViewModel() {
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             showLoading(isLoading)
@@ -100,16 +144,14 @@ class HomeFragment : Fragment() {
                 is Result.Loading -> showLoading(true)
                 is Result.Success -> {
                     showLoading(false)
-                    val predictions = result.data.predictions?.filterNotNull()?.sortedByDescending {
-                        it.createdAt
-                    }
-
-                    // Batasi hanya 2 item pertama
-                    val limitedPredictions = predictions?.take(3)
-
-                    limitedPredictions?.let { sortedList ->
+                    val sortedList = result.data.sortedByDescending { it.createdAt }.take(3)
+                    if (sortedList.isNotEmpty()) {
                         adapter.setItems(sortedList)
-                        binding.rvHistory.visibility = if (sortedList.isNotEmpty()) View.VISIBLE else View.GONE
+                        binding.rvHistory.visibility = View.VISIBLE
+                        binding.tvNoData.visibility = View.GONE
+                    } else {
+                        binding.rvHistory.visibility = View.GONE
+                        binding.tvNoData.visibility = View.VISIBLE
                     }
                 }
                 is Result.Error -> {
@@ -120,7 +162,7 @@ class HomeFragment : Fragment() {
                             binding.tvNoData.visibility = View.VISIBLE
                         }
                         "Error connection" -> {
-                            Toast.makeText(requireContext(), "Error connection", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), getString(R.string.connection_error), Toast.LENGTH_SHORT).show()
                         }
                         else -> {
                             Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
@@ -129,13 +171,7 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-
-        viewModel.noDataVisible.observe(viewLifecycleOwner) { isVisible ->
-            binding.tvNoData.visibility = if (isVisible) View.VISIBLE else View.GONE
-        }
     }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()

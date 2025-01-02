@@ -13,11 +13,14 @@ data class HistoryEntity (
     @ColumnInfo(name = "id")
     var id: String,
 
-    @ColumnInfo(name = "title")
-    var title: String? = null,
+    @ColumnInfo(name = "email")
+    var email: String,
 
     @ColumnInfo(name = "createdAt")
     var createdAt: String? = null,
+
+    @ColumnInfo(name = "title")
+    var title: String? = null,
 
     @ColumnInfo(name = "score")
     var score: String? = null

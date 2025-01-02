@@ -14,6 +14,9 @@ interface HistoryDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(history: List<HistoryEntity>)
 
-    @Query("SELECT * from HistoryEntity ORDER BY createdAt ASC")
-    fun getAllHistory(): LiveData<List<HistoryEntity>>
+    @Query("SELECT * FROM HistoryEntity WHERE email = :email ORDER BY createdAt DESC")
+    fun getAllHistory(email: String): LiveData<List<HistoryEntity>>
+
+    @Query("DELETE FROM HistoryEntity WHERE email = :email")
+    fun deleteByEmail(email: String)
 }
