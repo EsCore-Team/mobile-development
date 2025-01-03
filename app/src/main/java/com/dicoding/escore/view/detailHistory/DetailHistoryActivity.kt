@@ -2,11 +2,13 @@ package com.dicoding.escore.view.detailHistory
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.dicoding.escore.R
+import com.dicoding.escore.data.remote.Result
 import com.dicoding.escore.databinding.ActivityDetailHistoryBinding
 import com.dicoding.escore.view.ViewModelFactory
 
@@ -76,16 +78,50 @@ class DetailHistoryActivity : AppCompatActivity() {
         }
     }
 
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+
+    }
+
+//    private fun observeViewModel() {
+//        viewModel.detailLiveData.observe(this) { detail ->
+//            binding.textResultUpload.text = detail?.predictedResult?.score
+//            binding.suggestion.text = detail?.predictedResult?.suggestion
+//            binding.tvEssayTitle.text = detail?.title
+//            binding.description.text = detail?.essay
+//        }
+//
+//        viewModel.errorLiveData.observe(this) { error ->
+//            Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+//        }
+//    }
+
     private fun observeViewModel() {
-        viewModel.detailLiveData.observe(this) { detail ->
-            binding.textResultUpload.text = detail?.predictedResult?.score
-            binding.suggestion.text = detail?.predictedResult?.suggestion
-            binding.tvEssayTitle.text = detail?.title
-            binding.description.text = detail?.essay
+        viewModel.isLoading.observe(this) { isLoading ->
+            showLoading(isLoading)
         }
 
-        viewModel.errorLiveData.observe(this) { error ->
-            Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+        viewModel.detailLiveData.observe(this) { detail ->
+            when (detail) {
+                is Result.Loading -> showLoading(true)
+                is Result.Success -> {
+                    showLoading(false)
+                    binding.textResultUpload.text = detail.data?.predictedResult?.score
+                    binding.suggestion.text = detail.data?.predictedResult?.suggestion
+                    binding.tvEssayTitle.text = detail.data?.title
+                    binding.description.text = detail.data?.essay
+                }
+                is Result.Error -> {
+                    showLoading(false)
+                    val errorMessage = detail.error ?: "Unknown error"
+                    if (errorMessage.contains("Connection error", true) || errorMessage.contains("unable to resolve host", true)) {
+                        // Tampilkan toast jika ada masalah koneksi atau masalah host
+                        Toast.makeText(this, getString(R.string.connection_error), Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
     }
 }
