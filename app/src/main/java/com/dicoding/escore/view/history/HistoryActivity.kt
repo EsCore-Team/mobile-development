@@ -93,17 +93,15 @@ class HistoryActivity : AppCompatActivity() {
                 }
                 is Result.Error -> {
                     showLoading(false)
-                    when (result.error) {
-                        "No Data" -> {
-                            binding.rvHistory.visibility = View.GONE
-                            binding.tvNoData.visibility = View.VISIBLE
-                        }
-                        "Error connection" -> {
-                            Toast.makeText(this, getString(R.string.connection_error), Toast.LENGTH_SHORT).show()
-                        }
-                        else -> {
-                            Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
-                        }
+                    val errorMessage = result.error ?: "Unknown error"
+                    if (errorMessage.contains("Connection error", true) || errorMessage.contains("unable to resolve host", true)) {
+                        // Tampilkan toast jika ada masalah koneksi atau masalah host
+                        Toast.makeText(this, getString(R.string.connection_error), Toast.LENGTH_SHORT).show()
+                    } else if (errorMessage == "No Data") {
+                        binding.rvHistory.visibility = View.GONE
+                        binding.tvNoData.visibility = View.VISIBLE
+                    } else {
+                        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
