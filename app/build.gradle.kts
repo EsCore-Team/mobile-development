@@ -75,4 +75,5 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.room.runtime)
     ksp(libs.room.compiler)
+    implementation (libs.itextg)
 }

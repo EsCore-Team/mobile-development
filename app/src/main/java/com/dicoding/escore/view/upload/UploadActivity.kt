@@ -1,9 +1,14 @@
 package com.dicoding.escore.view.upload
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -16,10 +21,17 @@ import com.dicoding.escore.databinding.ActivityUploadBinding
 import com.dicoding.escore.pref.SessionManager
 import com.dicoding.escore.view.ViewModelFactoryML
 import com.dicoding.escore.view.resultUpload.ResultUploadActivity
+import com.itextpdf.text.pdf.PdfReader
+import com.itextpdf.text.pdf.parser.PdfTextExtractor
+import java.io.FileNotFoundException
+import java.io.InputStream
 
 
 class UploadActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUploadBinding
+    private val choosePdfFromDevice = 1001
+    private var inputStream: InputStream? = null
+    private val tag = "UploadActivity"
 
     private val viewModel by viewModels<UploadViewModel> {
         ViewModelFactoryML.getInstance(this)
@@ -39,6 +51,8 @@ class UploadActivity : AppCompatActivity() {
         setSupportActionBar(toolbar) // Set Toolbar as the ActionBar
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        binding.uploadButton.setOnClickListener { callChoosePdfFile()}
 
         binding.toolbar.navigationIcon?.setTint(getColor(R.color.black))
 
@@ -180,6 +194,48 @@ class UploadActivity : AppCompatActivity() {
         })
     }
 
+    private fun callChoosePdfFile() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "application/pdf"
+        }
+        startActivityForResult(intent, choosePdfFromDevice)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, resultData: Intent?) {
+        super.onActivityResult(requestCode, resultCode, resultData)
+        if (requestCode == choosePdfFromDevice && resultCode == RESULT_OK) {
+            resultData?.data?.let {
+                extractTextPdfFile(it)
+            }
+        }
+    }
+
+    private fun extractTextPdfFile(uri: Uri) {
+        try {
+            inputStream = contentResolver.openInputStream(uri)
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        }
+        Thread {
+            val builder = StringBuilder()
+            try {
+                inputStream?.let {
+                    val reader = PdfReader(it)
+                    val pages = reader.numberOfPages
+                    for (i in 1..pages) {
+                        builder.append(PdfTextExtractor.getTextFromPage(reader, i))
+                    }
+                    reader.close()
+                }
+                runOnUiThread {
+                    binding.descTextBox.setText(builder.toString())
+                }
+            } catch (e: Exception) {
+                Log.d(tag, "run: ${e.message}")
+            }
+        }.start()
+    }
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE

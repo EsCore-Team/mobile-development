@@ -2,6 +2,7 @@
 agp = "8.7.3"
 coreSplashscreen = "1.0.1"
 datastorePreferences = "1.1.1"
+itextg = "5.5.10"
 kotlin = "1.9.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -22,6 +23,7 @@ roomCompiler = "2.6.1"
 roomRuntime = "2.6.1"
 
 [libraries]
+itextg = { module = "com.itextpdf:itextg", version.ref = "itextg" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
